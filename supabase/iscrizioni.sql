@@ -1,5 +1,5 @@
 -- Tabella delle iscrizioni dal modulo "Prova Alias" (alias-ai.it).
--- Da eseguire una volta nello SQL Editor del progetto Supabase (regione UE, Francoforte).
+-- Da eseguire una volta nello SQL Editor del progetto Supabase (progetto `alias`, regione UE eu-west-1, Irlanda).
 -- Il sito usa la chiave anon/publishable: con queste regole può solo inserire righe, mai leggerle.
 -- Le iscrizioni si leggono dal Table Editor di Supabase, da loggati.
 
@@ -16,6 +16,10 @@ create table if not exists public.iscrizioni (
 );
 
 alter table public.iscrizioni enable row level security;
+
+-- il sito (ruolo anon) può solo inserire; select/update/delete restano chiusi
+revoke all on public.iscrizioni from anon, authenticated;
+grant insert on public.iscrizioni to anon;
 
 drop policy if exists "il sito puo solo inserire" on public.iscrizioni;
 create policy "il sito puo solo inserire" on public.iscrizioni
