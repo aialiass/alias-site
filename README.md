@@ -5,7 +5,9 @@ Landing di Alias, pubblicata su https://alias-ai.it tramite Vercel. Ogni push su
 Pagine statiche, nessuna build:
 - `index.html` homepage, con il modulo "Prova Alias"
 - `come-funziona.html`, `team.html`, `privacy.html`
-- `font/` il Bricolage Grotesque condiviso dalle pagine, `img/` le foto del team (dal deck TEF)
+- `404.html` pagina di errore: usa percorsi assoluti, perché viene servita a qualsiasi indirizzo
+- `favicon.svg`, `robots.txt`, `sitemap.xml`
+- `font/` il Bricolage Grotesque condiviso dalle pagine, `img/` le foto del team (dal deck TEF) e `og.png`, l'anteprima dei link (1200×630)
 - `api/iscrizione.js` funzione Vercel che riceve il modulo e lo salva su Supabase
 
 ## Modulo di iscrizione

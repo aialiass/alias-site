@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Come funziona Alias</title>
+<meta name="description" content="Alias riconosce i dati che identificano una persona e li sostituisce sul tuo PC, prima che la richiesta parta. Importi, date e riferimenti normativi restano uguali.">
+<link rel="canonical" href="https://www.alias-ai.it/come-funziona.html">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:title" content="Come funziona Alias">
+<meta property="og:description" content="Alias riconosce i dati che identificano una persona e li sostituisce sul tuo PC, prima che la richiesta parta. Importi, date e riferimenti normativi restano uguali.">
+<meta property="og:url" content="https://www.alias-ai.it/come-funziona.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://www.alias-ai.it/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 /* Layout: fondo bianco, titoli grandi in Bricolage allineati a sinistra, blocchi pieni viola e gialli.
    Giallo = dato vero (sul tuo PC), viola = sostituto (al fornitore AI), mai a contatto. */
@@ -76,6 +86,8 @@ a { color: inherit; }
 .top .wrap { display: flex; align-items: center; gap: 36px; min-height: 68px; }
 .logo { height: 24px; width: auto; display: block; color: var(--ink); }
 .logo .cur { fill: var(--yellow); }
+/* l'area cliccabile del logo è alta quanto un bottone, il disegno resta di 24px */
+.top .wrap > a:first-child { display: flex; align-items: center; min-height: 44px; }
 .top nav { display: flex; align-items: center; gap: 26px; }
 .top nav a { font-family: var(--brand); font-weight: 600; text-decoration: none; font-size: 16px; color: var(--soft); padding-block: 6px; border-bottom: 2px solid transparent; }
 .top nav a:hover { color: var(--ink); }
@@ -85,7 +97,8 @@ a { color: inherit; }
 @media (max-width: 760px) {
   .top { position: static; }
   .top .wrap { flex-wrap: wrap; gap: 0 16px; min-height: 60px; }
-  .top nav { order: 3; width: 100%; gap: 22px; overflow-x: auto; border-top: 1px solid var(--line); }
+  /* le quattro voci occupano 280px, più 40px di margini della pagina: sotto i 388px lo spazio tra le voci si stringe, così la riga non scorre fino a 360px */
+  .top nav { order: 3; width: 100%; gap: clamp(12px, calc((100vw - 322px) / 3), 22px); overflow-x: auto; border-top: 1px solid var(--line); }
   .top nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; white-space: nowrap; }
 }
 
@@ -104,11 +117,12 @@ a { color: inherit; }
 .foot .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 48px 40px; }
 .foot .about p { color: var(--soft); margin-top: 14px; max-width: 34ch; font-size: 15px; }
 .foot h4 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-.foot ul { list-style: none; padding: 0; display: grid; gap: 9px; }
-.foot ul a { color: var(--soft); text-decoration: none; font-size: 15px; }
+/* le voci del piede sono alte 32px (44px sul telefono): prima erano 20px, troppo poco per il dito */
+.foot ul { list-style: none; padding: 0; display: grid; justify-items: start; }
+.foot ul a { display: inline-flex; align-items: center; min-height: 32px; color: var(--soft); text-decoration: none; font-size: 15px; }
 .foot ul a:hover { color: var(--purple); }
 .foot .legal { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13px; }
-@media (max-width: 760px) { .foot .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot .about { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .foot .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot .about { grid-column: 1 / -1; } .foot ul a { min-height: 44px; } }
 
 /* ---------- blocco viola finale ---------- */
 .trial { margin-top: clamp(80px, 10vw, 128px); background: var(--purple); color: var(--on-purple); border-radius: 28px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 32px 56px; align-items: center; }
@@ -152,32 +166,43 @@ a { color: inherit; }
   :root { --muted: var(--soft); --line: #c9c5bc; --line-strong: #8f8b83; --field: #55595f; --on-purple-soft: #ffffff; --on-yellow-soft: var(--on-yellow); }
 }
 
-/* ---------- funzioni: card piene, viola e gialle alternate ---------- */
-.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
-.card { border-radius: 24px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 10px; min-height: 380px; overflow: hidden; }
-.card .label { font-size: 13px; }
-.card h3 { font-size: clamp(26px, 2.4vw, 32px); line-height: 1.02; }
-.card > p { font-size: 16.5px; max-width: 42ch; }
-.card .mock { margin-top: auto; padding-top: 26px; display: flex; justify-content: center; }
-.c-purple { background: var(--purple); color: var(--on-purple); }
-.c-purple .label, .c-purple > p { color: var(--on-purple-soft); }
-.c-yellow { background: var(--yellow); color: var(--on-yellow); }
-.c-yellow .label, .c-yellow > p { color: var(--on-yellow-soft); }
-.w4 { grid-column: span 4; }
-.w2 { grid-column: span 2; }
-@media (max-width: 980px) { .w4, .w2 { grid-column: span 3; } }
-@media (max-width: 640px) { .bento { grid-template-columns: minmax(0, 1fr); } .w4, .w2 { grid-column: auto; } .card { min-height: 0; } }
+/* ---------- funzioni come percorso: sei tappe numerate, dalla mattina in studio fino al modello.
+   Il quadrato della tappa dice dove succede: giallo sul PC dello studio, viola dal fornitore AI. ---------- */
+.features { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 18px; }
+.stop { position: relative; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.rail { display: flex; align-items: center; gap: 10px; font-family: var(--brand); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); white-space: nowrap; }
+.rail b { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 9px; background: var(--yellow); color: var(--on-yellow); font-size: 17px; font-weight: 800; letter-spacing: 0; }
+.stop.out .rail b { background: var(--purple); color: var(--on-purple); }
+/* il tratto con la freccia porta alla tappa dopo; l'ultima chiude il percorso */
+.rail i { position: relative; flex: 1; min-width: 16px; height: 2px; margin-left: 2px; background: var(--line-strong); }
+.rail i::after { content: ""; position: absolute; right: 0; top: 50%; width: 8px; height: 8px; border: solid var(--line-strong); border-width: 2px 2px 0 0; transform: translateY(-50%) rotate(45deg); }
+.stop:last-child .rail i { display: none; }
+.feature { flex: 1; display: flex; flex-direction: column; background: var(--soft-bg); border-radius: 24px; padding: 12px 12px 30px; }
+.feature .shot { display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; min-height: 252px; padding: 18px 12px; }
+.feature h3 { padding: 8px 14px 0; font-size: clamp(23px, 2vw, 27px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+.feature > p { padding: 8px 14px 0; color: var(--soft); font-size: 16px; }
+@media (max-width: 1080px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* in colonna il percorso scende: il tratto orizzontale sparisce e una linea unisce ogni scheda alla tappa sotto */
+@media (max-width: 760px) {
+  .features { grid-template-columns: minmax(0, 1fr); row-gap: 30px; }
+  .rail i { display: none; }
+  .stop:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 100%; width: 2px; height: 30px; background: var(--line-strong); }
+  .feature { padding: 10px 10px 26px; }
+  .feature .shot { min-height: 0; padding: 16px 6px 12px; }
+}
+@media (prefers-contrast: more) { .rail i, .stop:not(:last-child)::after { background: var(--ink); } .rail i::after { border-color: var(--ink); } }
 
-.swaprow { display: grid; grid-template-columns: 110px minmax(0, 1fr); align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.swaprow { display: grid; grid-template-columns: 86px minmax(0, 1fr); align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
 .swaprow:first-of-type { border-top: 0; }
 .swaprow span:first-child { font-size: 13px; color: var(--muted); }
 .swaprow .chip { font-size: 13.5px; justify-self: start; white-space: nowrap; }
-.row { display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-radius: 8px; }
+@media (max-width: 340px) { .swaprow .chip { white-space: normal; } }
+.row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 8px; }
 .row svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
-.row b { font-family: var(--brand); font-size: 16px; }
-.row small { color: var(--muted); }
+.row b { font-family: var(--brand); font-size: 16px; white-space: nowrap; }
+.row small { color: var(--muted); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .row.sel { background: var(--soft-bg); }
-.row .dot { margin-left: auto; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--line-strong); }
+.row .dot { margin-left: auto; flex: none; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--line-strong); }
 .row.sel .dot { border-color: var(--purple); background: var(--purple); }
 .terms { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .terms span { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; font-size: 13.5px; background: var(--soft-bg); }
@@ -190,8 +215,6 @@ a { color: inherit; }
 .check:first-of-type { border-top: 0; }
 .check b { width: 20px; height: 20px; border-radius: 5px; background: var(--purple); color: var(--on-purple); display: grid; place-items: center; font-size: 12px; flex: none; }
 
-.label { font-family: var(--brand); font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.card h3 { font-weight: 800; letter-spacing: -.035em; font-size: clamp(28px, 2.6vw, 36px); line-height: 1; }
 
 /* ---------- apertura: a destra il dato che cambia lato ---------- */
 .swapbox { display: grid; gap: 14px; justify-items: center; background: var(--soft-bg); border-radius: 28px; padding: clamp(28px, 4vw, 48px); }
@@ -219,6 +242,14 @@ a { color: inherit; }
 .zones-note { margin-top: 18px; color: var(--soft); max-width: 70ch; }
 @media (max-width: 980px) { .zones { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 560px) { .zone-steps { grid-template-columns: minmax(0, 1fr); } }
+/* ---------- fascia viola finale ----------
+   Qui il blocco viola non ha il modulo ma solo il bottone: resta basso, con il testo a sinistra e il bottone a destra. */
+.trial.band { grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; padding: clamp(24px, 3vw, 40px) clamp(24px, 4.4vw, 56px); }
+.trial.band h2 { font-size: clamp(28px, 3vw, 40px); margin-top: 8px; }
+.trial.band .trial-copy p { font-size: 17px; margin-top: 8px; max-width: none; }
+.trial.band .btn { min-height: 54px; padding-inline: 28px; font-size: 17px; }
+.trial.band .btn:focus-visible { outline-color: var(--on-purple); }
+@media (max-width: 760px) { .trial.band { grid-template-columns: minmax(0, 1fr); } .trial.band .btn { width: 100%; } }
 </style>
 </head>
 <body>
@@ -275,7 +306,7 @@ a { color: inherit; }
         <div class="zone out">
           <span class="zone-label"><i></i>Al fornitore AI</span>
           <div class="zone-steps" style="--n: 1">
-            <article class="step"><span class="n">03</span><h3>Invia</h3><p>Il modello di OpenAI, Anthropic o Google risponde sui sostituti.</p></article>
+            <article class="step"><span class="n">03</span><h3>Invia</h3><p>Il modello di OpenAI, Anthropic, Google o xAI risponde sui sostituti.</p></article>
           </div>
         </div>
         <div class="zone pc">
@@ -293,89 +324,103 @@ a { color: inherit; }
           <span class="eyebrow">Funzioni</span>
           <h2 class="display" id="funzioni-title">Tutto quello che serve per usare l'AI in studio.</h2>
         </div>
-        <p class="lead">I dati veri restano sul tuo PC. Al modello arrivano sostituti credibili, e nella risposta tornano i nomi giusti.</p>
+        <p class="lead">Alias sostituisce sul tuo PC i dati che riconosce. Al modello arrivano sostituti credibili, e nella risposta tornano i nomi giusti.</p>
       </div>
-      <div class="bento">
-        <article class="card c-purple w4">
-          <span class="label">Sul tuo PC</span>
-          <h3>Pseudonimizzazione prima dell'invio</h3>
-          <p>Ogni dato diventa un sostituto credibile dello stesso tipo, con codici fiscali e IBAN formalmente validi.</p>
-          <div class="mock" aria-hidden="true">
-            <div class="panel" id="swapper">
-              <div class="swaprow"><span>Nome</span><span class="chip" data-phase="real" data-real="Elena Marti" data-alias="Giulia Ferri">Elena Marti</span></div>
-              <div class="swaprow"><span>Codice fiscale</span><span class="chip" data-phase="real" data-real="MRTLNE90A41F205D" data-alias="FRRGLI92C45F205U">MRTLNE90A41F205D</span></div>
-              <div class="swaprow"><span>IBAN</span><span class="chip" data-phase="real" data-real="IT14 V099 9900 0010 0000 0123 456" data-alias="IT75 B099 9900 0010 0000 0654 321">IT14 V099 9900 0010 0000 0123 456</span></div>
-              <div class="swaprow"><span>Importo</span><span>€ 184,50 <small style="color:var(--muted)">resta uguale</small></span></div>
+      <ol class="features" role="list">
+        <li class="stop pc">
+          <div class="rail"><b aria-hidden="true">1</b><span>Con il tuo team</span><i aria-hidden="true"></i></div>
+          <article class="feature">
+            <div class="shot" aria-hidden="true">
+              <div class="panel">
+                <div class="check"><b>✓</b>La policy AI dello studio</div>
+                <div class="check"><b>✓</b>Alias installato sui PC</div>
+                <div class="check"><b>✓</b>Formazione di chi lo usa</div>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="card c-yellow w2">
-          <span class="label">Prima di inviare</span>
-          <h3>Controlla cosa esce</h3>
-          <p>Vedi il testo come lo legge il modello, e correggi se serve.</p>
-          <div class="mock" aria-hidden="true">
-            <div class="panel">
-              <p class="pv-title">Controlla cosa esce</p>
-              <p class="pv-sum">1 dato sostituito: 1 nome.</p>
-              <p class="pv-line">Scrivi a <span class="chip" data-phase="alias">Giulia Ferri</span> che il rimborso è arrivato.</p>
-              <div class="pv-btns"><span>Modifica</span><span>Invia</span></div>
+            <h3>Vi accompagniamo in studio</h3>
+            <p>Una mattina con voi per capire quali dati sono sensibili e partire con tutto il team.</p>
+          </article>
+        </li>
+        <li class="stop pc">
+          <div class="rail"><b aria-hidden="true">2</b><span>Regole dello studio</span><i aria-hidden="true"></i></div>
+          <article class="feature">
+            <div class="shot" aria-hidden="true">
+              <div class="panel">
+                <p class="k">Sostituisci sempre</p>
+                <div class="terms"><span>Edilnord <small>azienda</small></span><span>Pratica Orsini</span></div>
+                <p class="k">Non sostituire mai</p>
+                <div class="terms"><span>Agenzia delle Entrate</span></div>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="card c-yellow w2">
-          <span class="label">Regole dello studio</span>
-          <h3>Il dizionario dello studio</h3>
-          <p>Decidete voi cosa sostituire sempre e cosa mai.</p>
-          <div class="mock" aria-hidden="true">
-            <div class="panel">
-              <p class="k">Sostituisci sempre</p>
-              <div class="terms"><span>Edilnord <small>azienda</small></span><span>Pratica Orsini</span></div>
-              <p class="k">Non sostituire mai</p>
-              <div class="terms"><span>Agenzia delle Entrate</span></div>
+            <h3>Il dizionario dello studio</h3>
+            <p>Decidete voi cosa sostituire sempre e cosa mai.</p>
+          </article>
+        </li>
+        <li class="stop pc">
+          <div class="rail"><b aria-hidden="true">3</b><span>Sul tuo PC</span><i aria-hidden="true"></i></div>
+          <article class="feature">
+            <div class="shot" aria-hidden="true">
+              <div class="panel" id="swapper">
+                <div class="swaprow"><span>Nome</span><span class="chip" data-phase="real" data-real="Elena Marti" data-alias="Giulia Ferri">Elena Marti</span></div>
+                <div class="swaprow"><span>Codice fiscale</span><span class="chip" data-phase="real" data-real="MRTLNE90A41F205D" data-alias="FRRGLI92C45F205U">MRTLNE90A41F205D</span></div>
+                <div class="swaprow"><span>IBAN</span><span class="chip" data-phase="real" data-real="IT14 … 0123 456" data-alias="IT75 … 0654 321">IT14 … 0123 456</span></div>
+                <div class="swaprow"><span>Importo</span><span>€ 184,50 <small style="color:var(--muted)">resta uguale</small></span></div>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="card c-purple w4">
-          <span class="label">Al fornitore AI</span>
-          <h3>Tutti i modelli migliori</h3>
-          <p>OpenAI, Anthropic e Google nello stesso posto, con un solo abbonamento e senza legarsi a un solo fornitore.</p>
-          <div class="mock" aria-hidden="true">
-            <div class="panel">
-              <p class="k">Modello</p>
-              <div class="row"><svg viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><b>GPT</b><small>OpenAI</small><span class="dot"></span></div>
-              <div class="row sel"><svg viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg><b>Claude</b><small>Anthropic</small><span class="dot"></span></div>
-              <div class="row"><svg viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg><b>Gemini</b><small>Google</small><span class="dot"></span></div>
+            <h3>Pseudonimizzazione prima dell'invio</h3>
+            <p>Ogni dato diventa un sostituto credibile dello stesso tipo, con codici fiscali e IBAN formalmente validi.</p>
+          </article>
+        </li>
+        <li class="stop pc">
+          <div class="rail"><b aria-hidden="true">4</b><span>Prima di inviare</span><i aria-hidden="true"></i></div>
+          <article class="feature">
+            <div class="shot" aria-hidden="true">
+              <div class="panel">
+                <p class="pv-title">Controlla cosa esce</p>
+                <p class="pv-sum">1 dato sostituito: 1 nome.</p>
+                <p class="pv-line">Scrivi a <span class="chip" data-phase="alias">Giulia Ferri</span> che il rimborso è arrivato.</p>
+                <div class="pv-btns"><span>Modifica</span><span>Invia</span></div>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="card c-purple w2">
-          <span class="label">Sicurezza</span>
-          <h3>Nessun invio senza filtro</h3>
-          <p>Ogni messaggio passa dal filtro sul tuo PC prima di partire. Non c'è una strada che lo salta.</p>
-          <div class="mock" aria-hidden="true">
-            <div class="panel">
-              <div class="check"><b>✓</b>Scritto sul tuo PC</div>
-              <div class="check"><b>✓</b>Passato dal filtro</div>
-              <div class="check"><b>✓</b>Inviato al modello</div>
+            <h3>Controlla cosa esce</h3>
+            <p>Vedi il testo come lo legge il modello, e correggi se serve.</p>
+          </article>
+        </li>
+        <li class="stop pc">
+          <div class="rail"><b aria-hidden="true">5</b><span>Sicurezza</span><i aria-hidden="true"></i></div>
+          <article class="feature">
+            <div class="shot" aria-hidden="true">
+              <div class="panel">
+                <div class="check"><b>✓</b>Scritto sul tuo PC</div>
+                <div class="check"><b>✓</b>Passato dal filtro</div>
+                <div class="check"><b>✓</b>Inviato al modello</div>
+              </div>
             </div>
-          </div>
-        </article>
-        <article class="card c-yellow w4">
-          <span class="label">Con il tuo team</span>
-          <h3>Vi accompagniamo in studio</h3>
-          <p>Una mattina con voi per capire quali dati sono sensibili e partire con tutto il team.</p>
-          <div class="mock" aria-hidden="true">
-            <div class="panel">
-              <div class="check"><b>✓</b>La policy AI dello studio</div>
-              <div class="check"><b>✓</b>Alias installato sui PC</div>
-              <div class="check"><b>✓</b>Formazione di chi lo usa</div>
+            <h3>Nessun invio senza filtro</h3>
+            <p>Ogni messaggio passa dal filtro sul tuo PC prima di partire.</p>
+          </article>
+        </li>
+        <li class="stop out">
+          <div class="rail"><b aria-hidden="true">6</b><span>Al fornitore AI</span><i aria-hidden="true"></i></div>
+          <article class="feature">
+            <div class="shot" aria-hidden="true">
+              <div class="panel">
+                <p class="k">Modello</p>
+                <div class="row sel"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M9 12c5 0 4-7 9-7h3M9 12c5 0 4 7 9 7h3"/></svg><b>Auto</b><small>sceglie il più adatto</small><span class="dot"></span></div>
+                <div class="row"><svg viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg><b>Claude Opus 5.5</b><small>Anthropic</small><span class="dot"></span></div>
+                <div class="row"><svg viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><b>GPT-6 Astra</b><small>OpenAI</small><span class="dot"></span></div>
+                <div class="row"><svg viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg><b>Gemini 3.1 Pro</b><small>Google</small><span class="dot"></span></div>
+                <div class="row"><svg viewBox="0 0 466.04 516.93"><polygon points="0.12 182.71 234.14 516.92 338.15 516.92 104.13 182.71 0.12 182.71"/><polygon points="0 516.92 104.08 516.92 156.08 442.67 104.04 368.34 0 516.92"/><polygon points="466.04 0 361.96 0 182.1 256.86 234.15 331.18 466.04 0"/><polygon points="380.78 516.92 466.04 516.92 466.04 37.16 380.78 158.92 380.78 516.92"/></svg><b>Grok 4.5</b><small>xAI</small><span class="dot"></span></div>
+              </div>
             </div>
-          </div>
-        </article>
-      </div>
+            <h3>Tutti i modelli migliori</h3>
+            <p>OpenAI, Anthropic, Google e xAI nello stesso posto, con un solo abbonamento. In Auto è Alias a scegliere il modello più adatto alla richiesta.</p>
+          </article>
+        </li>
+      </ol>
     </section>
 
-    <section class="trial" aria-labelledby="final-title">
+    <section class="trial band" aria-labelledby="final-title">
       <div class="trial-copy">
         <span class="eyebrow">Prova</span>
         <h2 class="display" id="final-title">Prova Alias nel tuo studio.</h2>

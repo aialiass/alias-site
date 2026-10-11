@@ -3,8 +3,17 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta charset="utf-8">
-<title>Alias</title>
+<title>Alias · I modelli di AI senza i nomi dei tuoi clienti</title>
 <meta name="description" content="Alias sostituisce nomi, codici fiscali e IBAN prima che la richiesta arrivi al modello di AI, e rimette i dati veri nella risposta. Per studi professionali e PMI.">
+<link rel="canonical" href="https://www.alias-ai.it/">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:title" content="Alias · I modelli di AI senza i nomi dei tuoi clienti">
+<meta property="og:description" content="Alias sostituisce nomi, codici fiscali e IBAN prima che la richiesta arrivi al modello di AI, e rimette i dati veri nella risposta. Per studi professionali e PMI.">
+<meta property="og:url" content="https://www.alias-ai.it/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://www.alias-ai.it/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 /* Layout: fondo bianco, titoli grandi in Bricolage allineati a sinistra, blocchi pieni viola e gialli.
    Giallo = dato vero (sul tuo PC), viola = sostituto (al fornitore AI), mai a contatto. */
@@ -77,6 +86,8 @@ a { color: inherit; }
 .top .wrap { display: flex; align-items: center; gap: 36px; min-height: 68px; }
 .logo { height: 24px; width: auto; display: block; color: var(--ink); }
 .logo .cur { fill: var(--yellow); }
+/* l'area cliccabile del logo è alta quanto un bottone, il disegno resta di 24px */
+.top .wrap > a:first-child { display: flex; align-items: center; min-height: 44px; }
 .top nav { display: flex; align-items: center; gap: 26px; }
 .top nav a { font-family: var(--brand); font-weight: 600; text-decoration: none; font-size: 16px; color: var(--soft); padding-block: 6px; border-bottom: 2px solid transparent; }
 .top nav a:hover { color: var(--ink); }
@@ -86,7 +97,8 @@ a { color: inherit; }
 @media (max-width: 760px) {
   .top { position: static; }
   .top .wrap { flex-wrap: wrap; gap: 0 16px; min-height: 60px; }
-  .top nav { order: 3; width: 100%; gap: 22px; overflow-x: auto; border-top: 1px solid var(--line); }
+  /* le quattro voci occupano 280px, più 40px di margini della pagina: sotto i 388px lo spazio tra le voci si stringe, così la riga non scorre fino a 360px */
+  .top nav { order: 3; width: 100%; gap: clamp(12px, calc((100vw - 322px) / 3), 22px); overflow-x: auto; border-top: 1px solid var(--line); }
   .top nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; white-space: nowrap; }
 }
 
@@ -105,11 +117,12 @@ a { color: inherit; }
 .foot .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 48px 40px; }
 .foot .about p { color: var(--soft); margin-top: 14px; max-width: 34ch; font-size: 15px; }
 .foot h4 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-.foot ul { list-style: none; padding: 0; display: grid; gap: 9px; }
-.foot ul a { color: var(--soft); text-decoration: none; font-size: 15px; }
+/* le voci del piede sono alte 32px (44px sul telefono): prima erano 20px, troppo poco per il dito */
+.foot ul { list-style: none; padding: 0; display: grid; justify-items: start; }
+.foot ul a { display: inline-flex; align-items: center; min-height: 32px; color: var(--soft); text-decoration: none; font-size: 15px; }
 .foot ul a:hover { color: var(--purple); }
 .foot .legal { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13px; }
-@media (max-width: 760px) { .foot .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot .about { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .foot .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot .about { grid-column: 1 / -1; } .foot ul a { min-height: 44px; } }
 
 /* ---------- blocco viola finale ---------- */
 .trial { margin-top: clamp(80px, 10vw, 128px); background: var(--purple); color: var(--on-purple); border-radius: 28px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 32px 56px; align-items: center; }
@@ -145,7 +158,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .cursor, .caret, .dots i { animation: none; }
-  .chip, .thread { transition: none; }
+  .chip, .thread, .model, .models, .opt, .opt i { transition: none; }
   .btn:active { transform: none; }
 }
 
@@ -155,12 +168,32 @@ a { color: inherit; }
 
 /* ---------- chat animata, non cliccabile ---------- */
 .stage { background: var(--purple); border-radius: 28px; padding: clamp(16px, 3vw, 32px) clamp(14px, 3vw, 32px) 22px; display: grid; justify-items: center; gap: 22px; box-shadow: var(--shadow); }
-.window { width: min(800px, 100%); background: var(--bg); color: var(--ink); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; text-align: left; user-select: none; pointer-events: none; }
+/* altezza fissa: quando il testo nel campo va a capo è la conversazione a cedere spazio, non la pagina a spostarsi */
+.window { position: relative; height: 524px; width: min(800px, 100%); background: var(--bg); color: var(--ink); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; text-align: left; user-select: none; pointer-events: none; }
 .win-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-family: var(--brand); font-weight: 700; font-size: 16px; }
 .win-bar svg { width: 16px; height: 16px; fill: currentColor; }
 .win-bar .chev { fill: none; stroke: currentColor; stroke-width: 2; }
 .win-bar .state { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; }
-.thread { height: 380px; overflow: hidden; padding: 20px 22px 8px; display: flex; flex-direction: column; gap: 18px; transition: opacity .35s; }
+/* selettore del modello: a ogni giro il menu si apre e la scelta passa al modello successivo */
+.model { display: inline-flex; align-items: center; gap: 8px; min-width: 0; margin: -6px 0 -6px -10px; padding: 6px 8px 6px 10px; border-radius: 10px; white-space: nowrap; transition: background .2s; }
+.model svg { flex: none; }
+#model-name { overflow: hidden; text-overflow: ellipsis; }
+.win-bar .state { flex: none; white-space: nowrap; }
+/* sui telefoni stretti nome del modello e "Alias attivo" devono stare sulla stessa riga */
+@media (max-width: 400px) { .win-bar { padding-inline: 12px; font-size: 15px; } .model { gap: 6px; } .win-bar .state { font-size: 13px; padding-inline: 8px; } }
+.window.picking .model { background: var(--bubble); }
+.models { position: absolute; z-index: 2; top: 46px; left: 8px; width: min(296px, calc(100% - 16px)); padding: 6px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--card-shadow); opacity: 0; transform: translateY(-6px); transition: opacity .2s, transform .2s; }
+.window.picking .models { opacity: 1; transform: none; }
+.models .k { font-family: var(--brand); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 10px 4px; }
+.opt { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 9px; transition: background .2s; }
+.opt svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
+.opt b { font-family: var(--brand); font-size: 16px; white-space: nowrap; }
+.opt small { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; color: var(--muted); }
+.models .sep { display: block; height: 1px; margin: 4px 10px; background: var(--line); }
+.opt i { margin-left: auto; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--line-strong); flex: none; transition: background .2s, border-color .2s; }
+.opt.on { background: var(--soft-bg); }
+.opt.on i { border-color: var(--purple); background: var(--purple); }
+.thread { flex: 1 1 0; min-height: 0; overflow: hidden; padding: 20px 22px 8px; display: flex; flex-direction: column; gap: 18px; transition: opacity .35s; }
 .thread.fade { opacity: 0; }
 .msg { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; line-height: 1.7; }
 .msg.user { align-self: flex-end; max-width: 86%; background: var(--bubble); border-radius: 16px; padding: 9px 14px; }
@@ -194,6 +227,25 @@ a { color: inherit; }
 .stage.paused .dots i, .stage.paused .caret { animation-play-state: paused; }
 @media (prefers-contrast: more) { .steps { color: rgba(255, 255, 255, .8); } .stage-note { color: #ffffff; } }
 
+/* ---------- la demo sta tutta nella prima schermata ----------
+   Con testo e demo affiancati, margine, titolo e finestra si stringono con l'altezza dello schermo:
+   su un portatile (circa 700px utili) prima la demo finiva sotto il bordo.
+   69px è la testata; intorno alla finestra la demo ha i margini e il bottone (--frame) e i quattro passaggi (--steps),
+   che sotto i 1260px di larghezza vanno su due righe. */
+.hero { --pad: max(20px, min(clamp(48px, 7vw, 88px), calc(35vh - 225px))); --frame: 142px; --steps: 31px; padding-top: var(--pad); }
+.hero h1 { font-size: clamp(44px, min(5.6vw, calc(25vh - 100px)), 76px); }
+@media (min-width: 981px) {
+  .window { height: clamp(340px, calc(100vh - 69px - var(--pad) - var(--frame) - var(--steps) - 12px), 524px); }
+}
+@media (min-width: 981px) and (max-width: 1260px) { .hero { --steps: 68px; } }
+@media (min-width: 981px) and (max-height: 800px) {
+  .hero { --frame: 98px; }
+  .stage { padding-top: 18px; padding-bottom: 12px; gap: 12px; }
+  .thread { padding-top: 14px; gap: 12px; }
+  .msg { font-size: 14px; line-height: 1.6; }
+  .composer-area { padding-bottom: 14px; }
+}
+
 /* ---------- studi ---------- */
 .logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .slot { min-height: 112px; border-radius: 18px; background: var(--bg); box-shadow: var(--card-shadow), 0 0 0 1px var(--line); display: grid; place-items: center; padding: 16px; text-align: center; font-family: var(--brand); font-weight: 700; font-size: 18px; color: var(--soft); }
@@ -201,11 +253,11 @@ a { color: inherit; }
 .slot.empty { box-shadow: none; border: 1.5px dashed var(--line-strong); color: var(--muted); font-weight: 600; font-size: 16px; }
 .slot .bar { display: inline-block; width: .32em; height: .95em; background: var(--yellow); margin-left: .3em; vertical-align: -.12em; }
 .studi-cta { margin-top: 32px; }
-@media (max-width: 760px) { .logos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .slot.empty:nth-child(n+5) { display: none; } }
+@media (max-width: 760px) { .logos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---------- verso le funzioni ---------- */
 .teaser { background: var(--yellow); color: var(--on-yellow); border-radius: 28px; padding: clamp(28px, 4.5vw, 60px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 32px 56px; align-items: center; }
-.teaser h2 { font-weight: 800; font-stretch: 75%; font-size: clamp(36px, 4.4vw, 58px); line-height: .95; letter-spacing: -.01em; }
+.teaser h2 { font-weight: 800; font-size: clamp(36px, 4.4vw, 58px); line-height: .95; letter-spacing: -.04em; }
 .teaser > div:first-child > p { color: var(--on-yellow-soft); font-size: 18px; margin: 16px 0 26px; max-width: 40ch; }
 .teaser .btn.ghost { border-color: var(--bg); }
 .teaser .mock { display: flex; justify-content: center; }
@@ -224,6 +276,7 @@ a { color: inherit; }
 .form .consent { display: flex; align-items: flex-start; gap: 10px; font: 400 14px/1.5 var(--sans); color: var(--soft); }
 .consent input { width: 18px; height: 18px; margin-top: 2px; flex: none; accent-color: var(--purple); padding: 0; }
 .form .btn { width: 100%; min-height: 56px; font-size: 18px; }
+.form .btn:disabled { opacity: .6; cursor: progress; }
 .form-msg { font-size: 15px; color: var(--soft); min-height: 1.4em; }
 .form-msg[data-tone="error"] { color: var(--error); }
 .form input[aria-invalid="true"], .form select[aria-invalid="true"] { border-color: var(--error); outline-color: var(--error); box-shadow: inset 0 0 0 1px var(--error); }
@@ -243,9 +296,39 @@ a { color: inherit; }
 .consent a { color: var(--purple); }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .teaser h2 { margin-top: 12px; }
+/* ---------- il modulo sta in una schermata ----------
+   Con testo e modulo affiancati, il blocco viola deve stare tra la testata (69px) e il fondo dello schermo.
+   Più lo schermo è basso, più il blocco si stringe: prima email e telefono vanno sulla stessa riga,
+   poi calano margini, spazi tra i campi e altezza dei campi. */
+.trial { scroll-margin-top: 85px; }
+.form .pair { display: grid; gap: 14px; }
+@media (max-width: 760px) { .trial { scroll-margin-top: 16px; } }
+@media (min-width: 901px) and (max-height: 900px) {
+  .trial { padding-block: 56px; }
+  .form .pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+}
+@media (min-width: 901px) and (max-height: 780px) {
+  .trial { padding-block: 36px; }
+  .form { padding-block: 22px; gap: 10px; }
+  .form label { gap: 5px; }
+  .form .btn { min-height: 50px; }
+}
+@media (min-width: 901px) and (max-height: 690px) {
+  .trial { padding-block: 20px; }
+  .form { padding-block: 16px; }
+  .form input, .form select { padding-block: 9px; }
+  .form .btn { min-height: 46px; }
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-openai" viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+  <symbol id="i-anthropic" viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+  <symbol id="i-xai" viewBox="0 0 466.04 516.93"><polygon points="0.12 182.71 234.14 516.92 338.15 516.92 104.13 182.71 0.12 182.71"/><polygon points="0 516.92 104.08 516.92 156.08 442.67 104.04 368.34 0 516.92"/><polygon points="466.04 0 361.96 0 182.1 256.86 234.15 331.18 466.04 0"/><polygon points="380.78 516.92 466.04 516.92 466.04 37.16 380.78 158.92 380.78 516.92"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M9 12c5 0 4-7 9-7h3M9 12c5 0 4 7 9 7h3"/></symbol>
+</svg>
 
 <header class="top">
   <div class="wrap">
@@ -276,19 +359,28 @@ a { color: inherit; }
         <div class="trust">
           <span>Un solo abbonamento per i modelli di</span>
           <ul>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>OpenAI</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>Anthropic</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>Google</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-openai"/></svg>OpenAI</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-anthropic"/></svg>Anthropic</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-google"/></svg>Google</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-xai"/></svg>xAI</li>
           </ul>
         </div>
       </div>
 
       <div class="stage" id="prodotto" role="figure" aria-label="Alias in azione">
-        <div class="window" role="img" aria-label="Animazione con dati inventati: si scrive una richiesta con nome, codice fiscale e IBAN di Elena Marti; prima dell'invio diventano Giulia Ferri e altri sostituti; il modello risponde sui sostituti; nella risposta tornano i dati veri.">
+        <div class="window" id="window" role="img" aria-label="Animazione con dati inventati: si sceglie il modello, in automatico oppure tra Claude Opus 5.5, GPT-6 Astra, Gemini 3.1 Pro e Grok 4.5; si scrive una richiesta con nome, codice fiscale e IBAN di Elena Marti; prima dell'invio diventano Giulia Ferri e altri sostituti; il modello risponde sui sostituti; nella risposta tornano i dati veri.">
           <div class="win-bar">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>Claude
-            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="model"><svg viewBox="0 0 24 24" aria-hidden="true"><use id="model-icon" href="#i-auto"/></svg><span id="model-name">Auto</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
             <span class="state">Alias attivo</span>
+          </div>
+          <div class="models" id="models">
+            <p class="k">Scegli il modello</p>
+            <div class="opt on" data-auto><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg><b>Auto</b><small>sceglie il più adatto</small><i></i></div>
+            <span class="sep"></span>
+            <div class="opt"><svg viewBox="0 0 24 24"><use href="#i-anthropic"/></svg><b>Claude Opus 5.5</b><small>Anthropic</small><i></i></div>
+            <div class="opt"><svg viewBox="0 0 24 24"><use href="#i-openai"/></svg><b>GPT-6 Astra</b><small>OpenAI</small><i></i></div>
+            <div class="opt"><svg viewBox="0 0 24 24"><use href="#i-google"/></svg><b>Gemini 3.1 Pro</b><small>Google</small><i></i></div>
+            <div class="opt"><svg viewBox="0 0 24 24"><use href="#i-xai"/></svg><b>Grok 4.5</b><small>xAI</small><i></i></div>
           </div>
           <div class="thread" id="thread"></div>
           <div class="composer-area">
@@ -310,18 +402,6 @@ a { color: inherit; }
           <p class="stage-note">Esempio con dati inventati.</p>
         </div>
       </div>
-    </section>
-
-    <section class="section" id="studi" aria-labelledby="studi-title">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">I primi studi</span>
-          <h2 class="display" id="studi-title">Il tuo studio può essere tra i primi.</h2>
-        </div>
-        <p class="lead">Stiamo scegliendo gli studi con cui provare Alias, tra commercialisti e consulenti. Partiamo da come lavorate oggi: quali documenti usate e quali dati non devono uscire.</p>
-      </div>
-      <div class="logos" id="logos"></div>
-      <div class="studi-cta"><a class="btn ghost" href="#prova">Iscrivi il tuo studio</a></div>
     </section>
 
     <section class="section" id="funzioni" aria-labelledby="funzioni-title">
@@ -350,13 +430,25 @@ a { color: inherit; }
           <span class="eyebrow">Abbonamento</span>
           <h2 class="display" id="abbonamento-title">Un abbonamento. Tutti i modelli.</h2>
         </div>
-        <p class="lead">Un canone fisso al mese per ogni persona dello studio. Dentro ci sono i modelli di OpenAI, Anthropic e Google, l'uso di tutti i giorni e il filtro su ogni PC.</p>
+        <p class="lead">Un canone fisso al mese per ogni persona dello studio, con l'uso di tutti i giorni e il filtro su ogni PC.</p>
       </div>
       <div class="plan">
-        <article><span class="mark" aria-hidden="true"></span><h3>Tutti i modelli</h3><p>ChatGPT, Claude e Gemini nello stesso posto. Scegli il modello adatto a ogni lavoro, senza un abbonamento per ciascuno.</p></article>
+        <article><span class="mark" aria-hidden="true"></span><h3>Tutti i modelli</h3><p>ChatGPT, Claude, Gemini e Grok nello stesso posto. Scegli il modello adatto a ogni lavoro, senza un abbonamento per ciascuno.</p></article>
         <article><span class="mark" aria-hidden="true"></span><h3>Canone fisso a persona</h3><p>Una cifra al mese per ogni persona che usa Alias, con l'uso normale compreso. Nessun conto a consumo da tenere d'occhio.</p></article>
         <article><span class="mark" aria-hidden="true"></span><h3>Installazione e formazione</h3><p>Veniamo in studio, installiamo Alias sui PC, scriviamo con voi la policy AI e formiamo chi lo usa.</p></article>
       </div>
+    </section>
+
+    <section class="section" id="studi" aria-labelledby="studi-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">I primi studi</span>
+          <h2 class="display" id="studi-title">Il tuo studio può essere tra i primi.</h2>
+        </div>
+        <p class="lead">Stiamo scegliendo gli studi con cui provare Alias, tra commercialisti e consulenti. Partiamo da come lavorate oggi: quali documenti usate e quali dati non devono uscire.</p>
+      </div>
+      <div class="logos" id="logos"></div>
+      <div class="studi-cta"><a class="btn ghost" href="#prova">Iscrivi il tuo studio</a></div>
     </section>
 
     <section class="trial" id="prova" aria-labelledby="prova-title">
@@ -370,8 +462,10 @@ a { color: inherit; }
           <label>Nome<input id="f-nome" autocomplete="given-name" required></label>
           <label>Cognome<input id="f-cognome" autocomplete="family-name" required></label>
         </div>
-        <label>Email di lavoro<input id="f-email" type="email" autocomplete="email" placeholder="nome@studio.it" required></label>
-        <label><span>Telefono <small>facoltativo</small></span><span class="tel"><span>+39</span><input id="f-tel" type="tel" autocomplete="tel-national" aria-label="Telefono"></span></label>
+        <div class="pair">
+          <label>Email di lavoro<input id="f-email" type="email" autocomplete="email" placeholder="nome@studio.it" required></label>
+          <label><span>Telefono <small>facoltativo</small></span><span class="tel"><span>+39</span><input id="f-tel" type="tel" autocomplete="tel-national" aria-label="Telefono"></span></label>
+        </div>
         <div class="two">
           <label>Nome dello studio<input id="f-studio" autocomplete="organization" required></label>
           <label>Persone nello studio
@@ -386,9 +480,9 @@ a { color: inherit; }
         </div>
         <label class="consent"><input type="checkbox" id="f-ok" required><span>Ho letto l'<a href="privacy.html" target="_blank">informativa privacy</a>. Usiamo questi dati solo per ricontattarti e organizzare la prova.</span></label>
         <label class="hp" aria-hidden="true">Sito web<input id="f-sito" tabindex="-1" autocomplete="off"></label>
-        <button class="btn" type="submit">Iscriviti alla prova</button>
         <p class="form-msg" id="f-msg" aria-live="polite"></p>
-        <p class="form-alt" id="form-alt" hidden>Preferisci scriverci? <span class="mail" id="mail"></span><button type="button" class="copy" id="copy">Copia</button></p>
+        <button class="btn" type="submit">Iscriviti alla prova</button>
+        <p class="form-alt" id="form-alt" hidden>Preferisci scriverci? <a class="mail" id="mail"></a><button type="button" class="copy" id="copy">Copia</button></p>
       </form>
     </section>
   </div>
@@ -430,7 +524,7 @@ a { color: inherit; }
   const SIGNUP_ENDPOINT = "/api/iscrizione";
   /* CONTACT_EMAIL: indirizzo mostrato sotto il modulo. Finché è vuoto, la riga "Preferisci scriverci?" resta nascosta. */
   const CONTACT_EMAIL = "alessandro.diaz@alias-ai.it";
-  const SLOTS = 8;
+  const SLOTS = 4;
 
   const $ = (id) => document.getElementById(id);
   const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
@@ -476,6 +570,8 @@ a { color: inherit; }
 
   const thread = $("thread"), ctext = $("ctext"), send = $("send"), status = $("status");
   const steps = [...$("steps").children];
+  const win = $("window"), options = [...$("models").querySelectorAll(".opt")];
+  let model = 0, routed = 0;
 
   function setPhase(c, phase) {
     c.dataset.phase = phase;
@@ -492,6 +588,26 @@ a { color: inherit; }
     const m = el("div", "msg " + kind);
     for (const s of segs) m.append(typeof s === "string" ? document.createTextNode(s) : chip(s, phase));
     return m;
+  }
+  function setModel(i) {
+    model = i;
+    options.forEach((o, k) => o.classList.toggle("on", k === i));
+    $("model-name").textContent = options[i].querySelector("b").textContent;
+    $("model-icon").setAttribute("href", options[i].querySelector("use").getAttribute("href"));
+  }
+  /* In Auto il modello lo sceglie il router: a ogni passaggio la demo ne mostra uno diverso tra quelli in elenco. */
+  function routedModel() {
+    const picks = options.filter((o) => !("auto" in o.dataset));
+    return picks[routed++ % picks.length].querySelector("b").textContent;
+  }
+  /* Ogni giro riparte da un modello diverso, perché si veda che cambiarlo è un clic e che il filtro resta lo stesso. */
+  async function pickModel() {
+    win.classList.add("picking");
+    await wait(800);
+    setModel((model + 1) % options.length);
+    await wait(1000);
+    win.classList.remove("picking");
+    await wait(350);
   }
   /** Mezzo giro, cambio di dato, mezzo giro: come le chip dell'app. */
   async function flip(chips, phase, gap) {
@@ -557,7 +673,8 @@ a { color: inherit; }
     idleComposer();
     setStatus("");
     thread.classList.remove("fade");
-    await wait(700);
+    await wait(500);
+    await pickModel();
 
     setStep(1);
     await typeRequest();
@@ -582,6 +699,7 @@ a { color: inherit; }
     setStatus("");
 
     setStep(3);
+    if ("auto" in options[model].dataset) setStatus("Auto ha scelto " + routedModel());
     const answer = message("ai", [], "alias");
     dots.replaceWith(answer);
     await streamAnswer(answer);
@@ -619,16 +737,19 @@ a { color: inherit; }
 
   /* ---------------------------------------------------------------- iscrizione */
   const msg = $("f-msg"), mail = $("mail");
-  if (CONTACT_EMAIL) { mail.textContent = CONTACT_EMAIL; $("form-alt").hidden = false; }
+  if (CONTACT_EMAIL) { mail.textContent = CONTACT_EMAIL; mail.href = "mailto:" + CONTACT_EMAIL; $("form-alt").hidden = false; }
   const fallback = CONTACT_EMAIL ? "scrivici all'indirizzo qui sotto." : "riprova tra qualche minuto.";
   const field = (id) => $(id).value.trim();
-  function fail(id, text) {
+  /* Segna tutti i campi da correggere in un colpo solo, così chi compila non li scopre un invio alla volta. */
+  function fail(invalid) {
     msg.dataset.tone = "error";
-    msg.textContent = text;
-    const f = $(id);
-    f.setAttribute("aria-invalid", "true");
-    f.setAttribute("aria-describedby", "f-msg");
-    f.focus();
+    msg.textContent = (invalid.length > 1 ? "Mancano: " : "Manca: ") + invalid.map(([, label]) => label).join(", ") + ".";
+    for (const [id] of invalid) {
+      const f = $(id);
+      f.setAttribute("aria-invalid", "true");
+      f.setAttribute("aria-describedby", "f-msg");
+    }
+    $(invalid[0][0]).focus();
   }
   function clearErrors(form) {
     delete msg.dataset.tone;
@@ -639,12 +760,19 @@ a { color: inherit; }
     e.preventDefault();
     clearErrors(e.currentTarget);
     const data = { nome: field("f-nome"), cognome: field("f-cognome"), email: field("f-email"), telefono: field("f-tel"), studio: field("f-studio"), persone: field("f-size"), sito: field("f-sito"), privacy: $("f-ok").checked };
-    const missing = [["f-nome", data.nome], ["f-cognome", data.cognome], ["f-studio", data.studio], ["f-size", data.persone]].find(([, v]) => !v);
-    if (missing) { fail(missing[0], "Compila nome, cognome, studio e numero di persone."); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { fail("f-email", "Scrivi un'email valida, per esempio nome@studio.it."); return; }
-    if (!$("f-ok").checked) { fail("f-ok", "Conferma di aver letto l'informativa privacy."); return; }
+    const invalid = [
+      ["f-nome", "nome", data.nome !== ""],
+      ["f-cognome", "cognome", data.cognome !== ""],
+      ["f-email", "email valida", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)],
+      ["f-studio", "nome dello studio", data.studio !== ""],
+      ["f-size", "numero di persone", data.persone !== ""],
+      ["f-ok", "conferma dell'informativa privacy", data.privacy],
+    ].filter(([, , ok]) => !ok);
+    if (invalid.length) { fail(invalid); return; }
     if (!SIGNUP_ENDPOINT) { msg.textContent = "L'iscrizione online non è ancora attiva: " + fallback; return; }
     msg.textContent = "Invio in corso…";
+    const submit = $("signup").querySelector("button[type=submit]");
+    submit.disabled = true;
     try {
       const res = await fetch(SIGNUP_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       if (!res.ok) throw new Error("HTTP " + res.status);
@@ -654,9 +782,12 @@ a { color: inherit; }
       console.error("iscrizione non inviata", err);
       msg.dataset.tone = "error";
       msg.textContent = "Non siamo riusciti a registrare l'iscrizione: " + fallback;
+    } finally {
+      submit.disabled = false;
     }
   });
   $("copy").addEventListener("click", () => {
+    delete msg.dataset.tone;
     const select = () => {
       const r = document.createRange();
       r.selectNodeContents(mail);
