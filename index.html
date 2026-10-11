@@ -100,6 +100,8 @@ a { color: inherit; }
   /* le quattro voci occupano 280px, più 40px di margini della pagina: sotto i 388px lo spazio tra le voci si stringe, così la riga non scorre fino a 360px */
   .top nav { order: 3; width: 100%; gap: clamp(12px, calc((100vw - 322px) / 3), 22px); overflow-x: auto; border-top: 1px solid var(--line); }
   .top nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; white-space: nowrap; }
+  /* su telefono il logo porta già alla home: senza la voce Homepage il menu sta in una riga */
+  .top nav a:first-child { display: none; }
 }
 
 /* ---------- apertura: testo a sinistra, prodotto a destra ---------- */
@@ -293,20 +295,6 @@ a { color: inherit; }
 .plan h3 { font-size: clamp(24px, 2.2vw, 30px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
 .plan p { color: var(--soft); }
 @media (max-width: 860px) { .plan { grid-template-columns: minmax(0, 1fr); } }
-/* domande frequenti: un gruppo per tema, titolo a sinistra e domande a destra; details nativi, niente script */
-.faq { display: grid; gap: clamp(36px, 4.5vw, 56px); }
-.faq-group { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px 56px; align-items: start; }
-.faq-group h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; padding-top: 20px; }
-.faq details { border-top: 1px solid var(--line); }
-.faq details:last-child { border-bottom: 1px solid var(--line); }
-.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 44px; padding-block: 20px; font-family: var(--brand); font-size: clamp(18px, 1.6vw, 21px); font-weight: 700; letter-spacing: -.01em; line-height: 1.25; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--soft-bg); color: var(--purple); font: 400 22px/1 var(--sans); transition: transform .2s; }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { color: var(--soft); max-width: 62ch; padding-bottom: 22px; }
-#faq .lead a { color: var(--purple); }
-@media (max-width: 860px) { .faq-group { grid-template-columns: minmax(0, 1fr); } .faq-group h3 { padding-top: 0; } }
-@media (prefers-reduced-motion: reduce) { .faq summary::after { transition: none; } }
 .consent a { color: var(--purple); }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .teaser h2 { margin-top: 12px; }
@@ -352,6 +340,7 @@ a { color: inherit; }
     <nav aria-label="Sezioni">
       <a href="#" aria-current="page">Homepage</a>
       <a href="come-funziona.html">Come funziona</a>
+      <a href="domande.html">Domande</a>
       <a href="team.html">Team</a>
       <a href="#studi">Studi</a>
     </nav>
@@ -365,7 +354,7 @@ a { color: inherit; }
       <div class="hero-copy">
         <span class="eyebrow">Per studi professionali</span>
         <h1 class="display">I migliori modelli di AI. Senza i nomi dei tuoi clienti.<span class="cursor" aria-hidden="true"></span></h1>
-        <p class="lead">Nel tuo studio qualcuno usa già ChatGPT, spesso con i dati dei clienti. Alias sostituisce nomi, codici fiscali e IBAN sul tuo PC prima che la richiesta parta, e rimette i dati veri nella risposta.</p>
+        <p class="lead">L'AI è già nel lavoro di tutti i giorni, anche negli studi. Alias sostituisce nomi, codici fiscali e IBAN sul tuo PC prima che la richiesta parta, e rimette i dati veri nella risposta.</p>
         <div class="ctas">
           <a class="btn" href="#prova">Prova Alias</a>
           <a class="btn ghost" href="come-funziona.html">Come funziona</a>
@@ -465,89 +454,6 @@ a { color: inherit; }
       <div class="studi-cta"><a class="btn ghost" href="#prova">Iscrivi il tuo studio</a></div>
     </section>
 
-    <section class="section" id="faq" aria-labelledby="faq-title">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Domande frequenti</span>
-          <h2 class="display" id="faq-title">Prima di provare Alias.</h2>
-        </div>
-        <p class="lead">Modelli, dati e cosa succede in studio. Se la tua domanda non c'è, scrivici a <a href="mailto:alessandro.diaz@alias-ai.it">alessandro.diaz@alias-ai.it</a>.</p>
-      </div>
-      <div class="faq">
-        <div class="faq-group">
-          <h3>Modelli e abbonamento</h3>
-          <div>
-            <details>
-              <summary>Devo avere un account ChatGPT o Claude, magari Business?</summary>
-              <p>No. I modelli sono compresi nell'abbonamento ad Alias: non serve nessun account con OpenAI, Anthropic, Google o xAI, né personale né Business. Lo studio paga solo Alias.</p>
-            </details>
-            <details>
-              <summary>Posso usare solo Claude?</summary>
-              <p>Sì. Scegli il modello a ogni conversazione e puoi usare sempre lo stesso. Se preferite, nello studio lasciamo attivi solo i modelli che volete.</p>
-            </details>
-            <details>
-              <summary>Ho già ChatGPT Plus o Claude Pro. Posso collegarlo ad Alias?</summary>
-              <p>No. Gli abbonamenti personali funzionano solo nelle app di chi li vende e non si collegano ad altri programmi. Con Alias non servono: i modelli sono già dentro.</p>
-            </details>
-            <details>
-              <summary>Perché non basta un piano Business di ChatGPT o Copilot?</summary>
-              <p>I piani per aziende dei fornitori danno garanzie sul contratto, ma il testo arriva comunque con i dati veri, e ognuno ti lega ai suoi modelli. Alias sostituisce i dati sul tuo PC prima dell'invio e mette i modelli di tutti nello stesso posto.</p>
-            </details>
-            <details>
-              <summary>Il modello risponde bene anche con i sostituti?</summary>
-              <p>Sì. Ogni dato diventa un sostituto dello stesso tipo, un nome con un altro nome e un codice fiscale con un codice formalmente valido. Importi, date e riferimenti normativi restano uguali, quindi il modello ragiona sullo stesso caso. Nella risposta Alias rimette i dati veri.</p>
-            </details>
-            <details>
-              <summary>Quanto costa?</summary>
-              <p>Un canone fisso al mese per ogni persona che usa Alias, con l'uso di tutti i giorni compreso, più l'installazione e la formazione in studio. Il prezzo lo vediamo con te quando organizziamo la prova, in base a quante persone lo useranno.</p>
-            </details>
-          </div>
-        </div>
-        <div class="faq-group">
-          <h3>Dati e privacy</h3>
-          <div>
-            <details>
-              <summary>Quali dati sostituisce Alias?</summary>
-              <p>Nomi di persone, codici fiscali, IBAN e i termini che lo studio aggiunge al suo dizionario, come i nomi di aziende clienti o di pratiche. Importi, date e riferimenti normativi restano come sono.</p>
-            </details>
-            <details>
-              <summary>E se il filtro non riconosce un dato?</summary>
-              <p>Può succedere: nessun filtro automatico è perfetto. Per questo, prima dell'invio, vedi il testo come lo leggerà il modello, con i dati sostituiti evidenziati, e puoi correggerlo. I termini che vanno sostituiti sempre li aggiungete al dizionario dello studio.</p>
-            </details>
-            <details>
-              <summary>Dove restano i dati veri?</summary>
-              <p>Sul tuo PC, insieme alla tabella che collega ogni dato al suo sostituto. Al fornitore AI arriva il testo con i sostituti al posto dei dati riconosciuti.</p>
-            </details>
-            <details>
-              <summary>I fornitori usano le richieste per addestrare i modelli?</summary>
-              <p>Usiamo i modelli tramite le API per aziende, le cui condizioni escludono l'uso delle richieste per addestrare i modelli. In ogni caso ai fornitori arrivano i sostituti, non i dati che Alias ha riconosciuto.</p>
-            </details>
-            <details>
-              <summary>Come funziona con il GDPR?</summary>
-              <p>Lo studio resta titolare dei dati dei suoi clienti. Con ogni studio firmiamo un accordo sul trattamento (art. 28 GDPR), con l'elenco dei fornitori di AI che usiamo. Scriviamo con voi anche la policy AI dello studio.</p>
-            </details>
-          </div>
-        </div>
-        <div class="faq-group">
-          <h3>In studio</h3>
-          <div>
-            <details>
-              <summary>Funziona con PDF, Word ed Excel?</summary>
-              <p>Oggi Alias lavora sul testo che scrivi o incolli. La lettura dei documenti la stiamo costruendo con i primi studi, partendo da quelli che usate davvero. Scansioni e immagini per ora no: il filtro legge il testo, non le foto.</p>
-            </details>
-            <details>
-              <summary>Che computer serve?</summary>
-              <p>Alias è un'app da installare su ogni PC che lo usa, Windows o Mac. I requisiti li verifichiamo sui vostri computer prima dell'installazione.</p>
-            </details>
-            <details>
-              <summary>Cosa fate quando venite in studio?</summary>
-              <p>Una mattina con voi. Installiamo Alias sui PC, decidiamo insieme cosa mettere nel dizionario dello studio, scriviamo la policy AI e formiamo chi lo usa. La formazione serve anche per l'obbligo di alfabetizzazione sull'AI previsto dall'AI Act (art. 4).</p>
-            </details>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="trial" id="prova" aria-labelledby="prova-title">
       <div class="trial-copy">
         <span class="eyebrow">Prova</span>
@@ -597,7 +503,7 @@ a { color: inherit; }
     </div>
     <div>
       <h4>Studi</h4>
-      <ul><li><a href="#studi">I primi studi</a></li><li><a href="#faq">Domande frequenti</a></li><li><a href="#prova">Prova Alias</a></li></ul>
+      <ul><li><a href="#studi">I primi studi</a></li><li><a href="domande.html">Domande frequenti</a></li><li><a href="#prova">Prova Alias</a></li></ul>
     </div>
     <div>
       <h4>Chi siamo</h4>

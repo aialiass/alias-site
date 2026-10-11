@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Domande frequenti · Alias</title>
+<meta name="description" content="Modelli, abbonamento, dati e privacy: le risposte alle domande più comuni su Alias prima di provarlo nel tuo studio.">
+<link rel="canonical" href="https://www.alias-ai.it/domande.html">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:title" content="Domande frequenti · Alias">
+<meta property="og:description" content="Modelli, abbonamento, dati e privacy: le risposte alle domande più comuni su Alias prima di provarlo nel tuo studio.">
+<meta property="og:url" content="https://www.alias-ai.it/domande.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://www.alias-ai.it/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* Layout: fondo bianco, titoli grandi in Bricolage allineati a sinistra, blocchi pieni viola e gialli.
+   Giallo = dato vero (sul tuo PC), viola = sostituto (al fornitore AI), mai a contatto. */
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 200 800; font-stretch: 75% 100%; font-style: normal; font-display: swap; src: url("font/bricolage-grotesque.woff2") format("woff2"); }
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --soft-bg: #f6f5f2;
+  --bubble: #f1efea;
+  --ink: #15161a;
+  --soft: #55595f;
+  --muted: #6b7079;
+  --line: #e9e7e1;
+  --line-strong: #d3d0c8;
+  --field: #8f8b83;
+  --error: #b3261e;
+  --yellow: #ffb302;
+  --yellow-tint: #fff4d6;
+  --on-yellow: #15161a;
+  --on-yellow-soft: #5c4505;
+  --purple: #3d1a5b;
+  --purple-tint: #f1ecf6;
+  --purple-hover: #522a76;
+  --on-purple: #ffffff;
+  --on-purple-soft: #d9cde7;
+  --shadow: 0 24px 70px rgba(21, 22, 26, .16);
+  --card-shadow: 0 8px 30px rgba(21, 22, 26, .08);
+  --brand: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, p, ul, ol { margin: 0; }
+h1, h2, h3, h4 { font-family: var(--brand); text-wrap: balance; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
+.wrap { max-width: 1240px; margin-inline: auto; padding-inline: 20px; }
+.display { font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.eyebrow { font-family: var(--brand); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--purple); }
+.lead { font-size: clamp(17px, 1.5vw, 19px); color: var(--soft); max-width: 52ch; }
+.cursor { display: inline-block; width: .28em; height: .76em; background: var(--yellow); margin-left: .1em; vertical-align: -.02em; animation: blink 1.15s steps(1) 4; }
+/* il cursore del titolo lampeggia quattro volte e poi resta acceso: un lampeggio continuo accanto al titolo distrae chi legge */
+@keyframes blink { 0%, 55% { opacity: 1; } 55.01%, 100% { opacity: 0; } }
+.section { padding-block: clamp(80px, 10vw, 128px) 0; }
+.section-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px 56px; align-items: end; margin-bottom: clamp(32px, 4.5vw, 52px); }
+.section-head > div { display: grid; gap: 14px; }
+.section-head h2 { font-size: clamp(38px, 4.8vw, 62px); }
+@media (max-width: 860px) { .section-head { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- bottoni ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px;
+  border-radius: 12px; border: 1px solid var(--purple); background: var(--purple); color: var(--on-purple);
+  font: 700 16px/1 var(--brand); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background .15s, border-color .15s, transform .1s;
+}
+.btn:active { transform: scale(.98); }
+.btn:hover { background: var(--purple-hover); border-color: var(--purple-hover); }
+.btn.ghost { background: var(--bg); color: var(--ink); border-color: var(--line-strong); }
+.btn.ghost:hover { border-color: var(--ink); }
+.btn.small { min-height: 44px; padding: 0 18px; font-size: 15px; border-radius: 10px; }
+.btn.white { background: var(--on-purple); color: var(--purple); border-color: var(--on-purple); }
+.btn.white:hover { background: var(--on-purple-soft); border-color: var(--on-purple-soft); }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- testata ---------- */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 36px; min-height: 68px; }
+.logo { height: 24px; width: auto; display: block; color: var(--ink); }
+.logo .cur { fill: var(--yellow); }
+/* l'area cliccabile del logo è alta quanto un bottone, il disegno resta di 24px */
+.top .wrap > a:first-child { display: flex; align-items: center; min-height: 44px; }
+.top nav { display: flex; align-items: center; gap: 26px; }
+.top nav a { font-family: var(--brand); font-weight: 600; text-decoration: none; font-size: 16px; color: var(--soft); padding-block: 6px; border-bottom: 2px solid transparent; }
+.top nav a:hover { color: var(--ink); }
+.top nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); }
+.top .btn { margin-left: auto; }
+/* sul telefono le sezioni scendono in una seconda riga invece di sparire; la testata non resta fissa perché due righe fisse coprirebbero troppo schermo */
+@media (max-width: 760px) {
+  .top { position: static; }
+  .top .wrap { flex-wrap: wrap; gap: 0 16px; min-height: 60px; }
+  /* le quattro voci occupano 280px, più 40px di margini della pagina: sotto i 388px lo spazio tra le voci si stringe, così la riga non scorre fino a 360px */
+  .top nav { order: 3; width: 100%; gap: clamp(12px, calc((100vw - 322px) / 3), 22px); overflow-x: auto; border-top: 1px solid var(--line); }
+  .top nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; white-space: nowrap; }
+  /* su telefono il logo porta già alla home: senza la voce Homepage il menu sta in una riga */
+  .top nav a:first-child { display: none; }
+}
+
+/* ---------- apertura: testo a sinistra, prodotto a destra ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 40px 56px; align-items: center; padding-block: clamp(48px, 7vw, 88px) 0; }
+.hero-copy { display: grid; gap: 22px; align-content: center; }
+.hero h1 { font-size: clamp(44px, 5.6vw, 76px); }
+.trust { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 14px; color: var(--muted); padding-top: 6px; }
+.trust ul { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 0; list-style: none; }
+.trust li { display: inline-flex; align-items: center; gap: 7px; font-family: var(--brand); font-weight: 700; font-size: 15px; color: var(--soft); }
+.trust svg { width: 16px; height: 16px; fill: currentColor; }
+@media (max-width: 980px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- piede ---------- */
+.foot { margin-top: clamp(80px, 10vw, 128px); border-top: 1px solid var(--line); }
+.foot .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 48px 40px; }
+.foot .about p { color: var(--soft); margin-top: 14px; max-width: 34ch; font-size: 15px; }
+.foot h4 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+/* le voci del piede sono alte 32px (44px sul telefono): prima erano 20px, troppo poco per il dito */
+.foot ul { list-style: none; padding: 0; display: grid; justify-items: start; }
+.foot ul a { display: inline-flex; align-items: center; min-height: 32px; color: var(--soft); text-decoration: none; font-size: 15px; }
+.foot ul a:hover { color: var(--purple); }
+.foot .legal { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13px; }
+@media (max-width: 760px) { .foot .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot .about { grid-column: 1 / -1; } .foot ul a { min-height: 44px; } }
+
+/* ---------- blocco viola finale ---------- */
+.trial { margin-top: clamp(80px, 10vw, 128px); background: var(--purple); color: var(--on-purple); border-radius: 28px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 32px 56px; align-items: center; }
+.trial .eyebrow { color: var(--on-purple-soft); }
+.trial h2 { font-size: clamp(38px, 4.8vw, 62px); margin-top: 12px; }
+.trial-copy p { color: var(--on-purple-soft); font-size: 18px; margin-top: 16px; max-width: 42ch; }
+@media (max-width: 900px) { .trial { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- chip: il vero giallo, il sostituto viola ---------- */
+.chip {
+  display: inline-block; max-width: 100%; padding: 0 4px; margin: 0 1px; border-radius: 4px; line-height: 1.45;
+  font-family: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
+  transform-origin: 50% 50%; transition: transform 150ms cubic-bezier(.4, 0, .2, 1), background-color .3s, color .3s;
+}
+.chip[data-phase="plain"] { background: transparent; color: inherit; font-family: inherit; font-weight: inherit; }
+.chip[data-phase="real"] { background: var(--yellow); color: var(--on-yellow); }
+.chip[data-phase="alias"] { background: var(--purple); color: var(--on-purple); }
+.chip[data-flip="out"] { transform: scaleY(0); }
+.chip.new { animation: appear .35s ease-out; }
+@keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- pannelli bianchi dentro le card ---------- */
+.panel { background: var(--bg); color: var(--ink); border-radius: 14px; box-shadow: 0 10px 30px rgba(21, 22, 26, .14); padding: 16px; width: min(100%, 420px); font-size: 15px; text-align: left; }
+.panel .k { font-family: var(--brand); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.pv-title { font-family: var(--brand); font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+.pv-sum { color: var(--soft); font-size: 13px; margin-bottom: 8px; }
+.pv-k { font-family: var(--brand); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); }
+.pv-line { line-height: 1.8; font-size: 14px; padding: 2px 0 8px; }
+.pv-btns { display: flex; justify-content: flex-end; gap: 6px; margin-top: 4px; }
+.pv-btns span { font-family: var(--brand); font-size: 14px; font-weight: 700; border-radius: 8px; padding: 6px 13px; border: 1px solid var(--line-strong); }
+.pv-btns span:last-child { background: var(--purple); color: var(--on-purple); border-color: var(--purple); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cursor, .caret, .dots i { animation: none; }
+  .chip, .thread { transition: none; }
+  .btn:active { transform: none; }
+}
+
+@media (prefers-contrast: more) {
+  :root { --muted: var(--soft); --line: #c9c5bc; --line-strong: #8f8b83; --field: #55595f; --on-purple-soft: #ffffff; --on-yellow-soft: var(--on-yellow); }
+}
+
+/* ---------- funzioni: card piene, viola e gialle alternate ---------- */
+.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.card { border-radius: 24px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 10px; min-height: 380px; overflow: hidden; }
+.card .label { font-size: 13px; }
+.card h3 { font-size: clamp(26px, 2.4vw, 32px); line-height: 1.02; }
+.card > p { font-size: 16.5px; max-width: 42ch; }
+.card .mock { margin-top: auto; padding-top: 26px; display: flex; justify-content: center; }
+.c-purple { background: var(--purple); color: var(--on-purple); }
+.c-purple .label, .c-purple > p { color: var(--on-purple-soft); }
+.c-yellow { background: var(--yellow); color: var(--on-yellow); }
+.c-yellow .label, .c-yellow > p { color: var(--on-yellow-soft); }
+.w4 { grid-column: span 4; }
+.w2 { grid-column: span 2; }
+@media (max-width: 980px) { .w4, .w2 { grid-column: span 3; } }
+@media (max-width: 640px) { .bento { grid-template-columns: minmax(0, 1fr); } .w4, .w2 { grid-column: auto; } .card { min-height: 0; } }
+
+.swaprow { display: grid; grid-template-columns: 110px minmax(0, 1fr); align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.swaprow:first-of-type { border-top: 0; }
+.swaprow span:first-child { font-size: 13px; color: var(--muted); }
+.swaprow .chip { font-size: 13.5px; justify-self: start; white-space: nowrap; }
+.row { display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-radius: 8px; }
+.row svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
+.row b { font-family: var(--brand); font-size: 16px; }
+.row small { color: var(--muted); }
+.row.sel { background: var(--soft-bg); }
+.row .dot { margin-left: auto; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--line-strong); }
+.row.sel .dot { border-color: var(--purple); background: var(--purple); }
+.terms { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.terms span { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; font-size: 13.5px; background: var(--soft-bg); }
+.terms small { color: var(--muted); }
+.off-banner { border: 1.5px solid var(--ink); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; line-height: 1.45; margin-bottom: 10px; }
+.off-banner b { font-family: var(--brand); font-size: 15px; }
+.fake-input { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 8px 8px 14px; color: var(--muted); font-size: 13.5px; }
+.fake-input i { width: 24px; height: 24px; border-radius: 50%; background: var(--purple); opacity: .25; }
+.check { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-top: 1px solid var(--line); }
+.check:first-of-type { border-top: 0; }
+.check b { width: 20px; height: 20px; border-radius: 5px; background: var(--purple); color: var(--on-purple); display: grid; place-items: center; font-size: 12px; flex: none; }
+
+.label { font-family: var(--brand); font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.card h3 { font-weight: 800; letter-spacing: -.035em; font-size: clamp(28px, 2.6vw, 36px); line-height: 1; }
+
+/* ---------- apertura: a destra il dato che cambia lato ---------- */
+.swapbox { display: grid; gap: 14px; justify-items: center; background: var(--soft-bg); border-radius: 28px; padding: clamp(28px, 4vw, 48px); }
+.swapbox .side { width: 100%; max-width: 420px; display: grid; gap: 8px; }
+.swapbox .side span:first-child { font-family: var(--brand); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.swapbox .chip { font-size: clamp(24px, 2.6vw, 34px); padding: 4px 12px; border-radius: 8px; justify-self: start; }
+.swapbox .arrow { font-family: var(--brand); font-size: 30px; color: var(--muted); line-height: 1; }
+
+/* ---------- il giro di un dato: le zone dicono dove succede ogni passaggio ---------- */
+.zones { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+.zone { border-radius: 24px; padding: 18px; display: grid; gap: 14px; align-content: start; }
+.zone.pc { background: var(--yellow-tint); }
+.zone.out { background: var(--purple-tint); }
+.zone-label { display: flex; align-items: center; gap: 8px; font-family: var(--brand); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 6px 0; }
+.zone-label i { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.zone.pc .zone-label i { background: var(--yellow); }
+.zone.out .zone-label i { background: var(--purple); }
+.zone-steps { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 14px; }
+.step { background: var(--bg); border-radius: 16px; padding: 22px; display: grid; gap: 8px; align-content: start; min-height: 200px; box-shadow: var(--card-shadow); }
+.step .n { font-family: var(--brand); font-weight: 800; font-size: 40px; letter-spacing: -.04em; line-height: 1; }
+.zone.pc .step .n { color: var(--on-yellow-soft); }
+.zone.out .step .n { color: var(--purple); }
+.step h3 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.step p { color: var(--soft); font-size: 15px; }
+.zones-note { margin-top: 18px; color: var(--soft); max-width: 70ch; }
+@media (max-width: 980px) { .zones { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .zone-steps { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- team ---------- */
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.person { border-radius: 24px; padding: clamp(24px, 3vw, 32px); display: grid; gap: 12px; align-content: start; }
+.person:nth-child(odd) { background: var(--yellow-tint); }
+.person:nth-child(even) { background: var(--purple-tint); }
+.person img { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; border: 4px solid var(--yellow); margin-bottom: 8px; }
+.person:nth-child(even) img { border-color: var(--purple); }
+.person h2 { font-size: clamp(26px, 2.4vw, 32px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+.person .role { font-family: var(--brand); font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--purple); }
+.person:nth-child(odd) .role { color: var(--on-yellow-soft); }
+.person p { color: var(--soft); }
+.person .in { display: inline-flex; align-items: center; justify-self: start; min-height: 32px; font-family: var(--brand); font-weight: 700; font-size: 15px; color: var(--ink); text-underline-offset: 3px; margin-top: 4px; }
+@media (max-width: 760px) { .person .in { min-height: 44px; } }
+@media (max-width: 900px) { .people { grid-template-columns: minmax(0, 1fr); } }
+/* ---------- fascia viola finale ----------
+   Qui il blocco viola non ha il modulo ma solo il bottone: resta basso, con il testo a sinistra e il bottone a destra. */
+.trial.band { grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; padding: clamp(24px, 3vw, 40px) clamp(24px, 4.4vw, 56px); }
+.trial.band h2 { font-size: clamp(28px, 3vw, 40px); margin-top: 8px; }
+.trial.band .trial-copy p { font-size: 17px; margin-top: 8px; max-width: none; }
+.trial.band .btn { min-height: 54px; padding-inline: 28px; font-size: 17px; }
+.trial.band .btn:focus-visible { outline-color: var(--on-purple); }
+@media (max-width: 760px) { .trial.band { grid-template-columns: minmax(0, 1fr); } .trial.band .btn { width: 100%; } }
+/* domande frequenti: un gruppo per tema, titolo a sinistra e domande a destra; details nativi, niente script */
+.faq { display: grid; gap: clamp(36px, 4.5vw, 56px); }
+.faq-group { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px 56px; align-items: start; }
+.faq-group h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; padding-top: 20px; }
+.faq details { border-top: 1px solid var(--line); }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 44px; padding-block: 20px; font-family: var(--brand); font-size: clamp(18px, 1.6vw, 21px); font-weight: 700; letter-spacing: -.01em; line-height: 1.25; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--soft-bg); color: var(--purple); font: 400 22px/1 var(--sans); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { color: var(--soft); max-width: 62ch; padding-bottom: 22px; }
+@media (max-width: 860px) { .faq-group { grid-template-columns: minmax(0, 1fr); } .faq-group h3 { padding-top: 0; } }
+@media (prefers-reduced-motion: reduce) { .faq summary::after { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="index.html" aria-label="Alias, torna all'inizio">
+      <svg class="logo" viewBox="40 -850 3040 950" role="img" aria-label="Alias"><path fill="currentColor" d="M202.199462890625 11.4000244140625Q124.99951171875 11.4000244140625 82.5994873046875 -24.5Q40.199462890625 -60.4000244140625 40.199462890625 -117.400146484375Q40.199462890625 -154.8001708984375 57.3994140625 -185.500244140625Q74.599365234375 -216.2003173828125 107.09942626953125 -238.3004150390625Q139.5994873046875 -260.4005126953125 185.999755859375 -272.6005859375Q232.4000244140625 -284.8006591796875 290.20068359375 -284.8006591796875Q301.600341796875 -284.8006591796875 315.30010986328125 -284.50067138671875Q328.9998779296875 -284.20068359375 344.69964599609375 -283.30072021484375Q360.3994140625 -282.4007568359375 375.799072265625 -280.600830078125L378.59912109375 -209.9998779296875Q365.3994140625 -211.7998046875 349.89959716796875 -212.69976806640625Q334.3997802734375 -213.5997314453125 318.99993896484375 -213.99969482421875Q303.60009765625 -214.399658203125 291.0003662109375 -214.399658203125Q252.2001953125 -214.399658203125 223.80029296875 -208.59967041015625Q195.400390625 -202.7996826171875 176.80059814453125 -191.79974365234375Q158.2008056640625 -180.7998046875 149.0009765625 -164.79998779296875Q139.8011474609375 -148.8001708984375 139.8011474609375 -128.2005615234375Q139.8011474609375 -110.80078125 145.90106201171875 -98.50091552734375Q152.0009765625 -86.2010498046875 162.600830078125 -79.10113525390625Q173.20068359375 -72.001220703125 187.70050048828125 -68.60125732421875Q202.2003173828125 -65.2012939453125 219.2000732421875 -65.2012939453125Q252.19970703125 -65.2012939453125 277.29937744140625 -75.90118408203125Q302.3990478515625 -86.60107421875 319.8988037109375 -108.40093994140625Q337.3985595703125 -130.2008056640625 346.19842529296875 -162.8006591796875Q354.998291015625 -195.4005126953125 354.998291015625 -239.200439453125Q354.998291015625 -300.4000244140625 341.59844970703125 -333.999755859375Q328.1986083984375 -367.5994873046875 302.2989501953125 -380.99932861328125Q276.3992919921875 -394.399169921875 236.9998779296875 -394.399169921875Q204.7999267578125 -394.399169921875 175.2000732421875 -383.499267578125Q145.6002197265625 -372.599365234375 118.400146484375 -344.999267578125L65.3990478515625 -405.400146484375Q102.599365234375 -441.0003662109375 148.39959716796875 -457.0003662109375Q194.1998291015625 -473.0003662109375 241.9998779296875 -473.0003662109375Q286.1998291015625 -473.0003662109375 323.79986572265625 -462.60040283203125Q361.39990234375 -452.200439453125 389.5 -428.10052490234375Q417.60009765625 -404.0006103515625 433.3001708984375 -362.80072021484375Q449.000244140625 -321.600830078125 449.000244140625 -259.4010009765625V0.0H344.9986572265625V-56.7991943359375Q331.9986572265625 -36.99951171875 315.8988037109375 -23.59967041015625Q299.7989501953125 -10.1998291015625 281.39910888671875 -2.69989013671875Q262.999267578125 4.800048828125 242.9993896484375 8.10003662109375Q222.99951171875 11.4000244140625 202.199462890625 11.4000244140625Z M563.1993408203125 0.0V-78.80126953125H695.399169921875V-590.198974609375H569.1993408203125V-669.000244140625H796.0008544921875V-78.80126953125H927.20068359375V0.0Z M1079.599365234375 0.0V-78.80126953125H1194.5992431640625V-383.799072265625H1085.1993408203125V-462.600341796875H1294.6009521484375V-78.80126953125H1399.600830078125V0.0ZM1239.4000244140625 -545.799560546875Q1212.7996826171875 -545.799560546875 1193.9994506835938 -564.1997680664062Q1175.19921875 -582.5999755859375 1175.19921875 -608.000244140625Q1175.19921875 -635.2005615234375 1193.2994384765625 -653.000732421875Q1211.399658203125 -670.8009033203125 1239.4000244140625 -670.8009033203125Q1265.2003173828125 -670.8009033203125 1284.7005615234375 -652.1007080078125Q1304.2008056640625 -633.4005126953125 1304.2008056640625 -608.000244140625Q1304.2008056640625 -582.5999755859375 1284.7005615234375 -564.1997680664062Q1265.2003173828125 -545.799560546875 1239.4000244140625 -545.799560546875Z M1687.199462890625 11.4000244140625Q1609.99951171875 11.4000244140625 1567.5994873046875 -24.5Q1525.199462890625 -60.4000244140625 1525.199462890625 -117.400146484375Q1525.199462890625 -154.8001708984375 1542.3994140625 -185.500244140625Q1559.599365234375 -216.2003173828125 1592.0994262695312 -238.3004150390625Q1624.5994873046875 -260.4005126953125 1670.999755859375 -272.6005859375Q1717.4000244140625 -284.8006591796875 1775.20068359375 -284.8006591796875Q1786.600341796875 -284.8006591796875 1800.3001098632812 -284.50067138671875Q1813.9998779296875 -284.20068359375 1829.6996459960938 -283.30072021484375Q1845.3994140625 -282.4007568359375 1860.799072265625 -280.600830078125L1863.59912109375 -209.9998779296875Q1850.3994140625 -211.7998046875 1834.8995971679688 -212.69976806640625Q1819.3997802734375 -213.5997314453125 1803.9999389648438 -213.99969482421875Q1788.60009765625 -214.399658203125 1776.0003662109375 -214.399658203125Q1737.2001953125 -214.399658203125 1708.80029296875 -208.59967041015625Q1680.400390625 -202.7996826171875 1661.8005981445312 -191.79974365234375Q1643.2008056640625 -180.7998046875 1634.0009765625 -164.79998779296875Q1624.8011474609375 -148.8001708984375 1624.8011474609375 -128.2005615234375Q1624.8011474609375 -110.80078125 1630.9010620117188 -98.50091552734375Q1637.0009765625 -86.2010498046875 1647.600830078125 -79.10113525390625Q1658.20068359375 -72.001220703125 1672.7005004882812 -68.60125732421875Q1687.2003173828125 -65.2012939453125 1704.2000732421875 -65.2012939453125Q1737.19970703125 -65.2012939453125 1762.2993774414062 -75.90118408203125Q1787.3990478515625 -86.60107421875 1804.8988037109375 -108.40093994140625Q1822.3985595703125 -130.2008056640625 1831.1984252929688 -162.8006591796875Q1839.998291015625 -195.4005126953125 1839.998291015625 -239.200439453125Q1839.998291015625 -300.4000244140625 1826.5984497070312 -333.999755859375Q1813.1986083984375 -367.5994873046875 1787.2989501953125 -380.99932861328125Q1761.3992919921875 -394.399169921875 1721.9998779296875 -394.399169921875Q1689.7999267578125 -394.399169921875 1660.2000732421875 -383.499267578125Q1630.6002197265625 -372.599365234375 1603.400146484375 -344.999267578125L1550.3990478515625 -405.400146484375Q1587.599365234375 -441.0003662109375 1633.3995971679688 -457.0003662109375Q1679.1998291015625 -473.0003662109375 1726.9998779296875 -473.0003662109375Q1771.1998291015625 -473.0003662109375 1808.7998657226562 -462.60040283203125Q1846.39990234375 -452.200439453125 1874.5 -428.10052490234375Q1902.60009765625 -404.0006103515625 1918.3001708984375 -362.80072021484375Q1934.000244140625 -321.600830078125 1934.000244140625 -259.4010009765625V0.0H1829.9986572265625V-56.7991943359375Q1816.9986572265625 -36.99951171875 1800.8988037109375 -23.59967041015625Q1784.7989501953125 -10.1998291015625 1766.3991088867188 -2.69989013671875Q1747.999267578125 4.800048828125 1727.9993896484375 8.10003662109375Q1707.99951171875 11.4000244140625 1687.199462890625 11.4000244140625Z M2236.600341796875 10.800048828125Q2195.400146484375 10.800048828125 2158.0999755859375 3.00006103515625Q2120.7998046875 -4.7999267578125 2088.4996948242188 -20.99993896484375Q2056.1995849609375 -37.199951171875 2028.99951171875 -62.4000244140625L2075.39990234375 -146.4010009765625L2080.599853515625 -155.0009765625L2087.7999267578125 -150.6009521484375Q2090.199951171875 -143.0009765625 2093.0999755859375 -134.5009765625Q2096.0 -126.0009765625 2107.4000244140625 -114.4010009765625Q2131.2001953125 -93.4010009765625 2162.30029296875 -80.90106201171875Q2193.400390625 -68.401123046875 2238.2003173828125 -68.401123046875Q2269.199951171875 -68.401123046875 2290.69970703125 -75.801025390625Q2312.199462890625 -83.200927734375 2323.9993286132812 -96.500732421875Q2335.7991943359375 -109.800537109375 2335.7991943359375 -127.000244140625Q2335.7991943359375 -140.0001220703125 2329.5991821289062 -149.70001220703125Q2323.399169921875 -159.39990234375 2310.2991943359375 -167.59979248046875Q2297.19921875 -175.7996826171875 2275.999267578125 -184.1995849609375Q2254.79931640625 -192.5994873046875 2224.7994384765625 -201.3994140625Q2173.5994873046875 -215.599365234375 2135.5995483398438 -235.1993408203125Q2097.599609375 -254.79931640625 2076.9996337890625 -282.099365234375Q2056.399658203125 -309.3994140625 2056.399658203125 -345.799560546875Q2056.399658203125 -383.19970703125 2077.7998046875 -411.69989013671875Q2099.199951171875 -440.2000732421875 2139.10009765625 -456.90020751953125Q2179.000244140625 -473.600341796875 2234.4002685546875 -473.600341796875Q2264.400146484375 -473.600341796875 2290.6001586914062 -469.100341796875Q2316.8001708984375 -464.600341796875 2339.6002197265625 -455.80035400390625Q2362.4002685546875 -447.0003662109375 2382.3003540039062 -433.5003662109375Q2402.200439453125 -420.0003662109375 2420.00048828125 -402.0003662109375L2369.39990234375 -333.999267578125L2362.7999267578125 -325.999267578125L2356.1998291015625 -331.79931640625Q2355.1998291015625 -339.79931640625 2351.6998291015625 -347.09930419921875Q2348.1998291015625 -354.3992919921875 2336.7998046875 -365.3992919921875Q2315.39990234375 -381.399169921875 2289.0000610351562 -389.299072265625Q2262.6002197265625 -397.198974609375 2236.4002685546875 -397.198974609375Q2200.800537109375 -397.198974609375 2174.6007080078125 -385.1990966796875Q2148.40087890625 -373.19921875 2148.40087890625 -348.5994873046875Q2148.40087890625 -334.799560546875 2159.5009155273438 -322.89971923828125Q2170.6009521484375 -310.9998779296875 2196.8008422851562 -299.7000732421875Q2223.000732421875 -288.4002685546875 2268.2003173828125 -276.200439453125Q2324.80029296875 -260.6005859375 2359.9003295898438 -241.300537109375Q2395.0003662109375 -222.00048828125 2411.3004150390625 -196.0003662109375Q2427.6004638671875 -170.000244140625 2427.6004638671875 -135.0001220703125Q2427.6004638671875 -96.2000732421875 2406.1004028320312 -62.60003662109375Q2384.600341796875 -29.0 2342.0003051757812 -9.0999755859375Q2299.4002685546875 10.800048828125 2236.600341796875 10.800048828125Z"/><rect class="cur" x="2580" y="-850" width="500" height="950"/></svg>
+    </a>
+    <nav aria-label="Sezioni">
+      <a href="index.html">Homepage</a>
+      <a href="come-funziona.html">Come funziona</a>
+      <a href="domande.html" aria-current="page">Domande</a>
+      <a href="team.html">Team</a>
+      <a href="index.html#studi">Studi</a>
+    </nav>
+    <a class="btn small" href="index.html#prova">Prova Alias</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero" style="grid-template-columns: minmax(0, 1fr)">
+      <div class="hero-copy">
+        <span class="eyebrow">Domande frequenti</span>
+        <h1 class="display">Prima di provare Alias.<span class="cursor" aria-hidden="true"></span></h1>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Domande frequenti" style="padding-top: clamp(40px, 5vw, 64px)">
+      <div class="faq">
+        <div class="faq-group">
+          <h3>Modelli e abbonamento</h3>
+          <div>
+            <details>
+              <summary>Devo avere un account ChatGPT o Claude, magari Business?</summary>
+              <p>No. I modelli sono compresi nell'abbonamento ad Alias: non serve nessun account con OpenAI, Anthropic, Google o xAI, né personale né Business. Lo studio paga solo Alias.</p>
+            </details>
+            <details>
+              <summary>Posso usare solo Claude?</summary>
+              <p>Sì. Scegli il modello a ogni conversazione e puoi usare sempre lo stesso. Se preferite, nello studio lasciamo attivi solo i modelli che volete.</p>
+            </details>
+            <details>
+              <summary>Ho già ChatGPT Plus o Claude Pro. Posso collegarlo ad Alias?</summary>
+              <p>Oggi no. Anthropic permette di usare gli abbonamenti di Claude solo nelle sue app, e OpenAI ha appena aperto l'uso del piano ChatGPT in alcune app partner, tra cui Alias non c'è. Con Alias non servono: i modelli sono già compresi nell'abbonamento.</p>
+            </details>
+            <details>
+              <summary>Perché non basta un piano Business di ChatGPT o Copilot?</summary>
+              <p>I piani per aziende dei fornitori danno garanzie sul contratto, ma il testo arriva comunque con i dati veri, e ognuno ti lega ai suoi modelli. Alias sostituisce i dati sul tuo PC prima dell'invio e mette i modelli di tutti nello stesso posto.</p>
+            </details>
+            <details>
+              <summary>Il modello risponde bene anche con i sostituti?</summary>
+              <p>Sì. Ogni dato diventa un sostituto dello stesso tipo, un nome con un altro nome e un codice fiscale con un codice formalmente valido. Importi, date e riferimenti normativi restano uguali, quindi il modello ragiona sullo stesso caso. Nella risposta Alias rimette i dati veri.</p>
+            </details>
+            <details>
+              <summary>Quanto costa?</summary>
+              <p>Un canone fisso al mese per ogni persona che usa Alias, con l'uso di tutti i giorni compreso, più l'installazione e la formazione in studio. Il prezzo lo vediamo con te quando organizziamo la prova, in base a quante persone lo useranno.</p>
+            </details>
+          </div>
+        </div>
+        <div class="faq-group">
+          <h3>Dati e privacy</h3>
+          <div>
+            <details>
+              <summary>Quali dati sostituisce Alias?</summary>
+              <p>Nomi di persone, codici fiscali, IBAN e i termini che lo studio aggiunge al suo dizionario, come i nomi di aziende clienti o di pratiche. Importi, date e riferimenti normativi restano come sono.</p>
+            </details>
+            <details>
+              <summary>E se il filtro non riconosce un dato?</summary>
+              <p>Può succedere: nessun filtro automatico è perfetto. Per questo, prima dell'invio, vedi il testo come lo leggerà il modello, con i dati sostituiti evidenziati, e puoi correggerlo. I termini che vanno sostituiti sempre li aggiungete al dizionario dello studio.</p>
+            </details>
+            <details>
+              <summary>Dove restano i dati veri?</summary>
+              <p>Sul tuo PC, insieme alla tabella che collega ogni dato al suo sostituto. Al fornitore AI arriva il testo con i sostituti al posto dei dati riconosciuti.</p>
+            </details>
+            <details>
+              <summary>I fornitori usano le richieste per addestrare i modelli?</summary>
+              <p>Usiamo i modelli tramite le API per aziende, le cui condizioni escludono l'uso delle richieste per addestrare i modelli. In ogni caso ai fornitori arrivano i sostituti, non i dati che Alias ha riconosciuto.</p>
+            </details>
+            <details>
+              <summary>Come funziona con il GDPR?</summary>
+              <p>Lo studio resta titolare dei dati dei suoi clienti. Con ogni studio firmiamo un accordo sul trattamento (art. 28 GDPR), con l'elenco dei fornitori di AI che usiamo. Scriviamo con voi anche la policy AI dello studio.</p>
+            </details>
+          </div>
+        </div>
+        <div class="faq-group">
+          <h3>In studio</h3>
+          <div>
+            <details>
+              <summary>Che computer serve?</summary>
+              <p>Alias è un'app da installare su ogni PC che lo usa, Windows o Mac. I requisiti li verifichiamo sui vostri computer prima dell'installazione.</p>
+            </details>
+            <details>
+              <summary>Cosa fate quando venite in studio?</summary>
+              <p>Una mattina con voi. Installiamo Alias sui PC, decidiamo insieme cosa mettere nel dizionario dello studio, scriviamo la policy AI e formiamo chi lo usa. La formazione serve anche per l'obbligo di alfabetizzazione sull'AI previsto dall'AI Act (art. 4).</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trial band" aria-labelledby="final-title">
+      <div class="trial-copy">
+        <span class="eyebrow">Prova</span>
+        <h2 class="display" id="final-title">Prova Alias nel tuo studio.</h2>
+        <p>Lasciaci i tuoi dati: ti contattiamo per organizzare una prova con il tuo team.</p>
+      </div>
+      <div><a class="btn white" href="index.html#prova">Iscriviti alla prova</a></div>
+    </section>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="about">
+      <svg class="logo" viewBox="40 -850 3040 950" role="img" aria-label="Alias"><path fill="currentColor" d="M202.199462890625 11.4000244140625Q124.99951171875 11.4000244140625 82.5994873046875 -24.5Q40.199462890625 -60.4000244140625 40.199462890625 -117.400146484375Q40.199462890625 -154.8001708984375 57.3994140625 -185.500244140625Q74.599365234375 -216.2003173828125 107.09942626953125 -238.3004150390625Q139.5994873046875 -260.4005126953125 185.999755859375 -272.6005859375Q232.4000244140625 -284.8006591796875 290.20068359375 -284.8006591796875Q301.600341796875 -284.8006591796875 315.30010986328125 -284.50067138671875Q328.9998779296875 -284.20068359375 344.69964599609375 -283.30072021484375Q360.3994140625 -282.4007568359375 375.799072265625 -280.600830078125L378.59912109375 -209.9998779296875Q365.3994140625 -211.7998046875 349.89959716796875 -212.69976806640625Q334.3997802734375 -213.5997314453125 318.99993896484375 -213.99969482421875Q303.60009765625 -214.399658203125 291.0003662109375 -214.399658203125Q252.2001953125 -214.399658203125 223.80029296875 -208.59967041015625Q195.400390625 -202.7996826171875 176.80059814453125 -191.79974365234375Q158.2008056640625 -180.7998046875 149.0009765625 -164.79998779296875Q139.8011474609375 -148.8001708984375 139.8011474609375 -128.2005615234375Q139.8011474609375 -110.80078125 145.90106201171875 -98.50091552734375Q152.0009765625 -86.2010498046875 162.600830078125 -79.10113525390625Q173.20068359375 -72.001220703125 187.70050048828125 -68.60125732421875Q202.2003173828125 -65.2012939453125 219.2000732421875 -65.2012939453125Q252.19970703125 -65.2012939453125 277.29937744140625 -75.90118408203125Q302.3990478515625 -86.60107421875 319.8988037109375 -108.40093994140625Q337.3985595703125 -130.2008056640625 346.19842529296875 -162.8006591796875Q354.998291015625 -195.4005126953125 354.998291015625 -239.200439453125Q354.998291015625 -300.4000244140625 341.59844970703125 -333.999755859375Q328.1986083984375 -367.5994873046875 302.2989501953125 -380.99932861328125Q276.3992919921875 -394.399169921875 236.9998779296875 -394.399169921875Q204.7999267578125 -394.399169921875 175.2000732421875 -383.499267578125Q145.6002197265625 -372.599365234375 118.400146484375 -344.999267578125L65.3990478515625 -405.400146484375Q102.599365234375 -441.0003662109375 148.39959716796875 -457.0003662109375Q194.1998291015625 -473.0003662109375 241.9998779296875 -473.0003662109375Q286.1998291015625 -473.0003662109375 323.79986572265625 -462.60040283203125Q361.39990234375 -452.200439453125 389.5 -428.10052490234375Q417.60009765625 -404.0006103515625 433.3001708984375 -362.80072021484375Q449.000244140625 -321.600830078125 449.000244140625 -259.4010009765625V0.0H344.9986572265625V-56.7991943359375Q331.9986572265625 -36.99951171875 315.8988037109375 -23.59967041015625Q299.7989501953125 -10.1998291015625 281.39910888671875 -2.69989013671875Q262.999267578125 4.800048828125 242.9993896484375 8.10003662109375Q222.99951171875 11.4000244140625 202.199462890625 11.4000244140625Z M563.1993408203125 0.0V-78.80126953125H695.399169921875V-590.198974609375H569.1993408203125V-669.000244140625H796.0008544921875V-78.80126953125H927.20068359375V0.0Z M1079.599365234375 0.0V-78.80126953125H1194.5992431640625V-383.799072265625H1085.1993408203125V-462.600341796875H1294.6009521484375V-78.80126953125H1399.600830078125V0.0ZM1239.4000244140625 -545.799560546875Q1212.7996826171875 -545.799560546875 1193.9994506835938 -564.1997680664062Q1175.19921875 -582.5999755859375 1175.19921875 -608.000244140625Q1175.19921875 -635.2005615234375 1193.2994384765625 -653.000732421875Q1211.399658203125 -670.8009033203125 1239.4000244140625 -670.8009033203125Q1265.2003173828125 -670.8009033203125 1284.7005615234375 -652.1007080078125Q1304.2008056640625 -633.4005126953125 1304.2008056640625 -608.000244140625Q1304.2008056640625 -582.5999755859375 1284.7005615234375 -564.1997680664062Q1265.2003173828125 -545.799560546875 1239.4000244140625 -545.799560546875Z M1687.199462890625 11.4000244140625Q1609.99951171875 11.4000244140625 1567.5994873046875 -24.5Q1525.199462890625 -60.4000244140625 1525.199462890625 -117.400146484375Q1525.199462890625 -154.8001708984375 1542.3994140625 -185.500244140625Q1559.599365234375 -216.2003173828125 1592.0994262695312 -238.3004150390625Q1624.5994873046875 -260.4005126953125 1670.999755859375 -272.6005859375Q1717.4000244140625 -284.8006591796875 1775.20068359375 -284.8006591796875Q1786.600341796875 -284.8006591796875 1800.3001098632812 -284.50067138671875Q1813.9998779296875 -284.20068359375 1829.6996459960938 -283.30072021484375Q1845.3994140625 -282.4007568359375 1860.799072265625 -280.600830078125L1863.59912109375 -209.9998779296875Q1850.3994140625 -211.7998046875 1834.8995971679688 -212.69976806640625Q1819.3997802734375 -213.5997314453125 1803.9999389648438 -213.99969482421875Q1788.60009765625 -214.399658203125 1776.0003662109375 -214.399658203125Q1737.2001953125 -214.399658203125 1708.80029296875 -208.59967041015625Q1680.400390625 -202.7996826171875 1661.8005981445312 -191.79974365234375Q1643.2008056640625 -180.7998046875 1634.0009765625 -164.79998779296875Q1624.8011474609375 -148.8001708984375 1624.8011474609375 -128.2005615234375Q1624.8011474609375 -110.80078125 1630.9010620117188 -98.50091552734375Q1637.0009765625 -86.2010498046875 1647.600830078125 -79.10113525390625Q1658.20068359375 -72.001220703125 1672.7005004882812 -68.60125732421875Q1687.2003173828125 -65.2012939453125 1704.2000732421875 -65.2012939453125Q1737.19970703125 -65.2012939453125 1762.2993774414062 -75.90118408203125Q1787.3990478515625 -86.60107421875 1804.8988037109375 -108.40093994140625Q1822.3985595703125 -130.2008056640625 1831.1984252929688 -162.8006591796875Q1839.998291015625 -195.4005126953125 1839.998291015625 -239.200439453125Q1839.998291015625 -300.4000244140625 1826.5984497070312 -333.999755859375Q1813.1986083984375 -367.5994873046875 1787.2989501953125 -380.99932861328125Q1761.3992919921875 -394.399169921875 1721.9998779296875 -394.399169921875Q1689.7999267578125 -394.399169921875 1660.2000732421875 -383.499267578125Q1630.6002197265625 -372.599365234375 1603.400146484375 -344.999267578125L1550.3990478515625 -405.400146484375Q1587.599365234375 -441.0003662109375 1633.3995971679688 -457.0003662109375Q1679.1998291015625 -473.0003662109375 1726.9998779296875 -473.0003662109375Q1771.1998291015625 -473.0003662109375 1808.7998657226562 -462.60040283203125Q1846.39990234375 -452.200439453125 1874.5 -428.10052490234375Q1902.60009765625 -404.0006103515625 1918.3001708984375 -362.80072021484375Q1934.000244140625 -321.600830078125 1934.000244140625 -259.4010009765625V0.0H1829.9986572265625V-56.7991943359375Q1816.9986572265625 -36.99951171875 1800.8988037109375 -23.59967041015625Q1784.7989501953125 -10.1998291015625 1766.3991088867188 -2.69989013671875Q1747.999267578125 4.800048828125 1727.9993896484375 8.10003662109375Q1707.99951171875 11.4000244140625 1687.199462890625 11.4000244140625Z M2236.600341796875 10.800048828125Q2195.400146484375 10.800048828125 2158.0999755859375 3.00006103515625Q2120.7998046875 -4.7999267578125 2088.4996948242188 -20.99993896484375Q2056.1995849609375 -37.199951171875 2028.99951171875 -62.4000244140625L2075.39990234375 -146.4010009765625L2080.599853515625 -155.0009765625L2087.7999267578125 -150.6009521484375Q2090.199951171875 -143.0009765625 2093.0999755859375 -134.5009765625Q2096.0 -126.0009765625 2107.4000244140625 -114.4010009765625Q2131.2001953125 -93.4010009765625 2162.30029296875 -80.90106201171875Q2193.400390625 -68.401123046875 2238.2003173828125 -68.401123046875Q2269.199951171875 -68.401123046875 2290.69970703125 -75.801025390625Q2312.199462890625 -83.200927734375 2323.9993286132812 -96.500732421875Q2335.7991943359375 -109.800537109375 2335.7991943359375 -127.000244140625Q2335.7991943359375 -140.0001220703125 2329.5991821289062 -149.70001220703125Q2323.399169921875 -159.39990234375 2310.2991943359375 -167.59979248046875Q2297.19921875 -175.7996826171875 2275.999267578125 -184.1995849609375Q2254.79931640625 -192.5994873046875 2224.7994384765625 -201.3994140625Q2173.5994873046875 -215.599365234375 2135.5995483398438 -235.1993408203125Q2097.599609375 -254.79931640625 2076.9996337890625 -282.099365234375Q2056.399658203125 -309.3994140625 2056.399658203125 -345.799560546875Q2056.399658203125 -383.19970703125 2077.7998046875 -411.69989013671875Q2099.199951171875 -440.2000732421875 2139.10009765625 -456.90020751953125Q2179.000244140625 -473.600341796875 2234.4002685546875 -473.600341796875Q2264.400146484375 -473.600341796875 2290.6001586914062 -469.100341796875Q2316.8001708984375 -464.600341796875 2339.6002197265625 -455.80035400390625Q2362.4002685546875 -447.0003662109375 2382.3003540039062 -433.5003662109375Q2402.200439453125 -420.0003662109375 2420.00048828125 -402.0003662109375L2369.39990234375 -333.999267578125L2362.7999267578125 -325.999267578125L2356.1998291015625 -331.79931640625Q2355.1998291015625 -339.79931640625 2351.6998291015625 -347.09930419921875Q2348.1998291015625 -354.3992919921875 2336.7998046875 -365.3992919921875Q2315.39990234375 -381.399169921875 2289.0000610351562 -389.299072265625Q2262.6002197265625 -397.198974609375 2236.4002685546875 -397.198974609375Q2200.800537109375 -397.198974609375 2174.6007080078125 -385.1990966796875Q2148.40087890625 -373.19921875 2148.40087890625 -348.5994873046875Q2148.40087890625 -334.799560546875 2159.5009155273438 -322.89971923828125Q2170.6009521484375 -310.9998779296875 2196.8008422851562 -299.7000732421875Q2223.000732421875 -288.4002685546875 2268.2003173828125 -276.200439453125Q2324.80029296875 -260.6005859375 2359.9003295898438 -241.300537109375Q2395.0003662109375 -222.00048828125 2411.3004150390625 -196.0003662109375Q2427.6004638671875 -170.000244140625 2427.6004638671875 -135.0001220703125Q2427.6004638671875 -96.2000732421875 2406.1004028320312 -62.60003662109375Q2384.600341796875 -29.0 2342.0003051757812 -9.0999755859375Q2299.4002685546875 10.800048828125 2236.600341796875 10.800048828125Z"/><rect class="cur" x="2580" y="-850" width="500" height="950"/></svg>
+      <p>L'AI sui dati dei clienti, con i nomi che restano nello studio.</p>
+    </div>
+    <div>
+      <h4>Prodotto</h4>
+      <ul><li><a href="index.html">Homepage</a></li><li><a href="come-funziona.html">Come funziona</a></li></ul>
+    </div>
+    <div>
+      <h4>Studi</h4>
+      <ul><li><a href="index.html#studi">I primi studi</a></li><li><a href="domande.html">Domande frequenti</a></li><li><a href="index.html#prova">Prova Alias</a></li></ul>
+    </div>
+    <div>
+      <h4>Chi siamo</h4>
+      <ul><li><a href="team.html">Team</a></li><li><a href="index.html#prova">Scrivici</a></li><li><a href="privacy.html">Privacy</a></li></ul>
+    </div>
+    <p class="legal">© 2026 Alias · Un progetto di Alessandro Diaz, Marco Baggio e Gabriele Biancardi, Università Bocconi, Milano. Gli esempi in queste pagine usano dati inventati. · <a href="privacy.html">Informativa privacy</a></p>
+  </div>
+</footer>
+</body>
+</html>
