@@ -253,7 +253,9 @@ a { color: inherit; }
 .trial.band .btn:focus-visible { outline-color: var(--on-purple); }
 @media (max-width: 760px) { .trial.band { grid-template-columns: minmax(0, 1fr); } .trial.band .btn { width: 100%; } }
 </style>
-<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+// i browser del team, segnati da /escludimi.html, non vengono contati
+window.va("beforeSend", function (e) { try { if (localStorage.getItem("va-disable")) return null; } catch (_) {} return e; });</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
